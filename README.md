@@ -41,6 +41,8 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 The usage is very simple. Use the `.alertDialog` view modifier that expects returning `AlertToast`.
 
+After 2 seconds the alert will be dismissed or by tapping on the alert view.
+
 - Assign a state variable to `show` parameter.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
