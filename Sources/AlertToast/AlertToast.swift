@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(iOS 13, *)
-fileprivate struct AnimatedCheckmark: View {
+public struct AnimatedCheckmark: View {
     
     var color: Color = .black
     
@@ -17,7 +17,7 @@ fileprivate struct AnimatedCheckmark: View {
     
     @State private var percentage: CGFloat = .zero
     
-    var body: some View {
+    public var body: some View {
         Path { path in
             path.move(to: CGPoint(x: 0, y: height / 2))
             path.addLine(to: CGPoint(x: width / 2.5, y: height))
@@ -34,7 +34,7 @@ fileprivate struct AnimatedCheckmark: View {
 }
 
 @available(iOS 13, *)
-fileprivate struct AnimatedXmark: View {
+public struct AnimatedXmark: View {
     
     var color: Color = .black
     
@@ -54,7 +54,7 @@ fileprivate struct AnimatedXmark: View {
     
     @State private var percentage: CGFloat = .zero
     
-    var body: some View {
+    public var body: some View {
         Path { path in
             path.move(to: CGPoint(x: rect.minX, y: rect.minY))
             path.addLine(to: CGPoint(x: rect.maxY, y: rect.maxY))
@@ -74,9 +74,7 @@ fileprivate struct AnimatedXmark: View {
 @available(iOS 13, *)
 public struct AlertToast: View{
     
-    @Environment(\.colorScheme) private var colorScheme
-    
-    enum AlertType: Equatable{
+    public enum AlertType: Equatable{
         case complete(Color)
         case error(Color)
         case systemImage(String, Color)
@@ -88,7 +86,7 @@ public struct AlertToast: View{
     var title: String
     var subTitle: String?
     
-    init(type: AlertType, title: String, subTitle: String? = nil){
+    public init(type: AlertType, title: String, subTitle: String? = nil){
         self.type = type
         self.title = title
         self.subTitle = subTitle
@@ -146,13 +144,13 @@ public struct AlertToast: View{
 }
 
 @available(iOS 13, *)
-struct AlertToastModifier: ViewModifier{
+public struct AlertToastModifier: ViewModifier{
     
     @Binding var show: Bool
     var alert: () -> AlertToast
     
     @ViewBuilder
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .overlay(
                 ZStack{
@@ -182,7 +180,7 @@ struct AlertToastModifier: ViewModifier{
 }
 
 @available(iOS 13, *)
-struct WithFrameModifier: ViewModifier{
+public struct WithFrameModifier: ViewModifier{
     
     var withFrame: Bool
     
@@ -190,7 +188,7 @@ struct WithFrameModifier: ViewModifier{
     var maxHeight: CGFloat = 150
     
     @ViewBuilder
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         if withFrame{
             content
                 .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: .center)
@@ -203,30 +201,30 @@ struct WithFrameModifier: ViewModifier{
 @available(iOS 13, *)
 extension View{
     
-    func withFrame(_ widthFrame: Bool) -> some View{
+    public func withFrame(_ widthFrame: Bool) -> some View{
         modifier(WithFrameModifier(withFrame: widthFrame))
     }
     
-    func alertDialog(show: Binding<Bool>, alert: @escaping () -> AlertToast) -> some View{
+    public func alertDialog(show: Binding<Bool>, alert: @escaping () -> AlertToast) -> some View{
         modifier(AlertToastModifier(show: show, alert: alert))
     }
 }
 
 @available(iOS 13, *)
-struct BlurView: UIViewRepresentable {
-    typealias UIViewType = UIVisualEffectView
+public struct BlurView: UIViewRepresentable {
+    public typealias UIViewType = UIVisualEffectView
     
     let style: UIBlurEffect.Style
     
-    init(style: UIBlurEffect.Style = .systemMaterial) {
+    public init(style: UIBlurEffect.Style = .systemMaterial) {
         self.style = style
     }
     
-    func makeUIView(context: Context) -> UIVisualEffectView {
+    public func makeUIView(context: Context) -> UIVisualEffectView {
         return UIVisualEffectView(effect: UIBlurEffect(style: self.style))
     }
     
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+    public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         uiView.effect = UIBlurEffect(style: self.style)
     }
 }
