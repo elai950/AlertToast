@@ -146,7 +146,7 @@ struct AlertToast: View{
 }
 
 @available(iOS 13, *)
-fileprivate struct AlertToastModifier: ViewModifier{
+struct AlertToastModifier: ViewModifier{
     
     @Binding var show: Bool
     var alert: () -> AlertToast
@@ -182,7 +182,7 @@ fileprivate struct AlertToastModifier: ViewModifier{
 }
 
 @available(iOS 13, *)
-fileprivate struct WithFrameModifier: ViewModifier{
+struct WithFrameModifier: ViewModifier{
     
     var withFrame: Bool
     
