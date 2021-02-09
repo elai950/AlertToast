@@ -72,7 +72,7 @@ fileprivate struct AnimatedXmark: View {
 }
 
 @available(iOS 13, *)
-struct AlertToast: View{
+public struct AlertToast: View{
     
     @Environment(\.colorScheme) private var colorScheme
     
@@ -94,7 +94,7 @@ struct AlertToast: View{
         self.subTitle = subTitle
     }
     
-    var body: some View{
+    public var body: some View{
         VStack{
             
             switch type{
