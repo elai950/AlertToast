@@ -2,6 +2,7 @@
 
 **Popup from Apple Music & Feedback in AppStore**.
 
+* For SwiftUI.
 * Contains `Done/Complete`, `Image`, `Error` and `Message`.
 * Light & Dark Mode.
 * Supports iOS 13 minimum.
