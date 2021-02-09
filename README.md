@@ -1,11 +1,13 @@
 # AlertToast-SwiftUI
 
 **Popup from Apple Music & Feedback in AppStore**.
-Contains `Done/Complete`, `Image`, `Error` and `Message`. Supports Dark Mode.
+Contains `Done/Complete`, `Image`, `Error` and `Message`.
+* Supports Light & Dark Mode.
 I tried to recreate Apple's alerts as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
 
 <p float="left">
+    <img src="https://user-images.githubusercontent.com/37900883/107416158-d4e58500-6b1c-11eb-8b37-9701d275e9a7.gif" width="222" />
 </p>
 
 If you like the project, don't forget to `put star ★`.
