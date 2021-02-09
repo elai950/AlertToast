@@ -72,6 +72,7 @@ struct ContentView: View{
 }
 ```
 
+
 For showing a complete/error alert message with animations:
 You need to choose a `Color`.
 
@@ -84,7 +85,8 @@ You need to choose a `Color`.
 }
 ```
 
-You can add as many `.alertDialog` as you like.
+You can add many `.alertDialog` for different alert popups.
+
 
 For showing a image/system image alert message:
 
