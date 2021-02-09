@@ -199,13 +199,13 @@ public struct WithFrameModifier: ViewModifier{
 }
 
 @available(iOS 13, *)
-extension View{
+public extension View{
     
-    public func withFrame(_ widthFrame: Bool) -> some View{
+    func withFrame(_ widthFrame: Bool) -> some View{
         modifier(WithFrameModifier(withFrame: widthFrame))
     }
     
-    public func alertDialog(show: Binding<Bool>, alert: @escaping () -> AlertToast) -> some View{
+    func alertDialog(show: Binding<Bool>, alert: @escaping () -> AlertToast) -> some View{
         modifier(AlertToastModifier(show: show, alert: alert))
     }
 }
