@@ -22,7 +22,7 @@ The [Swift Package Manager](https://swift.org/package-manager/) is a tool for ma
 To integrate `AlertToast` into your Xcode project using Xcode 12, specify it in `File > Swift Packages > Add Package Dependency...`:
 
 ```ogdl
-https://github.com/elai950/AlertToast
+https://github.com/elai950/AlertToast.git
 ```
 
 ### Manually
