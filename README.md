@@ -2,7 +2,9 @@
 
 **Popup from Apple Music & Feedback in AppStore**.
 Contains `Done/Complete`, `Image`, `Error` and `Message`.
+
 * Supports Light & Dark Mode.
+* Supports iOS 13 minimum.
 
 I tried to recreate Apple's alerts as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
@@ -12,6 +14,8 @@ You can find these alerts in the AppStore after feedback and after you add a son
 </p>
 
 If you like the project, don't forget to `put star ★`.
+
+<a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>
 
 [<img src="https://s18955.pcdn.co/wp-content/uploads/2018/02/github.png" width="25"/>](https://github.com/elai950)
 
