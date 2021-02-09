@@ -83,6 +83,6 @@ For showing a image/system image alert message:
     AlertToast(type: .systemImage("star.fill", .yellow), title: "Favorite", subTitle: nil)
 }
 .alertDialog(show: $showSystemImage){
-    AlertToast(type: .image("star.fill"), title: "Favorited", subTitle: nil)
+    AlertToast(type: .image("<YOUR IMAGE NAME>"), title: "Favorited", subTitle: nil)
 }
 ```
