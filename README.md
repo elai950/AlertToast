@@ -79,10 +79,10 @@ You can add as many `.alertDialog` as you like.
 For showing a image/system image alert message:
 
 ```swift
-.alertDialog(show: $showSystemImage){
+.alertDialog(show: $showAlertSystemImage){
     AlertToast(type: .systemImage("star.fill", .yellow), title: "Favorite", subTitle: nil)
 }
-.alertDialog(show: $showSystemImage){
+.alertDialog(show: $showAlertImage){
     AlertToast(type: .image("<YOUR IMAGE NAME>"), title: "Favorited", subTitle: nil)
 }
 ```
