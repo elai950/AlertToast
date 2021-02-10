@@ -7,11 +7,10 @@
 ## Overview
 **Popup like Apple Music & Feedback in AppStore**.
 
-* For SwiftUI.
-* Contains `Done/Complete`, `Image`, `Error` and `Message`.
-* Light & Dark Mode.
-* Supports iOS 13 minimum.
-* Suitable for any kind of view builder.
+* Built for SwiftUI.
+* `Complete`, `Error` `SystemImage`, `Image` and `Regular` (Only Text).
+* Supports Light & Dark Mode.
+* Works with any kind of view builder.
 * Localization support.
 
 I tried to recreate Apple's alerts appearance and behaivor as much as possible to be suitable for SwiftUI.
