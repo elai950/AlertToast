@@ -78,11 +78,11 @@ struct ContentView: View{
 #### Properties
 
 Available Alert Types:
-- Regular: Text only (Title and Subtitle).
-- Complete: Animated Checkmark.
-- Error: Animated XMark.
-- System Image: Name.
-- Image: Add image from Assets.
+- Regular: text only (Title and Subtitle).
+- Complete: animated checkmark.
+- Error: animated xmark.
+- System Image: name image from `SFSymbols`.
+- Image: name image from Assets.
 
 ```swift
 //Alert dialog view modifier:
