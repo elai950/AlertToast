@@ -96,7 +96,7 @@ struct ContentView: View{
 AlertToast(type: .regular, title: String, subTitle: Optional(String))
 
 //Complete/Error Alert:
-AlertToast(type: .complete(Color), title: String, subTitle: Optional(String))
+AlertToast(type: .complete(Color)/.error(Color), title: String, subTitle: Optional(String))
 
 //System Image Alert:
 AlertToast(type: .systemImage(String, Color), title: String, subTitle: Optional(String))
