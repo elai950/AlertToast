@@ -47,6 +47,7 @@ After 2 seconds the alert will be dismissed or by tapping on the alert view.
 - Default duration is 2.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
+<br>
 For showing a simple `AlertToast` text message:
 
 ```swift 
@@ -72,7 +73,7 @@ struct ContentView: View{
     }
 }
 ```
-
+<br>
 Changing duration time and adding sub title:
 ```swift
 .alertDialog(show: $showAlert, duration: 3){
@@ -80,7 +81,7 @@ Changing duration time and adding sub title:
 }
 ```
 
-
+<br>
 For showing a complete/error alert message with animations:
 
 - Choose a `Color` in the enum associated value.
@@ -96,7 +97,7 @@ For showing a complete/error alert message with animations:
 
 You can add many `.alertDialog` for different alert popups.
 
-
+<br>
 For showing a image/system image alert message:
 
 - Determine the image name and color within the enum associated values.
