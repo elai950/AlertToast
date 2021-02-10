@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(iOS 13, *)
-public struct AnimatedCheckmark: View {
+struct AnimatedCheckmark: View {
     
     var color: Color = .black
     
@@ -17,7 +17,7 @@ public struct AnimatedCheckmark: View {
     
     @State private var percentage: CGFloat = .zero
     
-    public var body: some View {
+    var body: some View {
         Path { path in
             path.move(to: CGPoint(x: 0, y: height / 2))
             path.addLine(to: CGPoint(x: width / 2.5, y: height))
@@ -34,7 +34,7 @@ public struct AnimatedCheckmark: View {
 }
 
 @available(iOS 13, *)
-public struct AnimatedXmark: View {
+struct AnimatedXmark: View {
     
     var color: Color = .black
     
@@ -54,7 +54,7 @@ public struct AnimatedXmark: View {
     
     @State private var percentage: CGFloat = .zero
     
-    public var body: some View {
+    var body: some View {
         Path { path in
             path.move(to: CGPoint(x: rect.minX, y: rect.minY))
             path.addLine(to: CGPoint(x: rect.maxY, y: rect.maxY))
@@ -147,6 +147,7 @@ public struct AlertToast: View{
 public struct AlertToastModifier: ViewModifier{
     
     @Binding var show: Bool
+    var duration: Double = 2
     var alert: () -> AlertToast
     
     @ViewBuilder
@@ -157,7 +158,7 @@ public struct AlertToastModifier: ViewModifier{
                     if show{
                         alert()
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                                     withAnimation(.spring()){
                                         show = false
                                     }
@@ -201,12 +202,21 @@ public struct WithFrameModifier: ViewModifier{
 @available(iOS 13, *)
 public extension View{
     
-    func withFrame(_ widthFrame: Bool) -> some View{
-        modifier(WithFrameModifier(withFrame: widthFrame))
+    /// Return some view w/o frame depends on the condition.
+    /// This view modifier function is set by default to:
+    /// - `maxWidth`: 150
+    /// - `maxHeight`: 150
+    func withFrame(_ withFrame: Bool) -> some View{
+        modifier(WithFrameModifier(withFrame: withFrame))
     }
     
-    func alertDialog(show: Binding<Bool>, alert: @escaping () -> AlertToast) -> some View{
-        modifier(AlertToastModifier(show: show, alert: alert))
+    /// Present `AlertToast`.
+    /// - Parameters:
+    ///   - show: Binding<Bool>
+    ///   - alert: () -> AlertToast
+    /// - Returns: `AlertToast`
+    func alertDialog(show: Binding<Bool>, duration: Double = 2, alert: @escaping () -> AlertToast) -> some View{
+        modifier(AlertToastModifier(show: show, duration: duration, alert: alert))
     }
 }
 
