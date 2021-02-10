@@ -85,7 +85,7 @@ struct ContentView: View{
 }
 ```
 
-### How to
+### Parameters
 
 #### Available Alert Types:
 - **Regular:** text only (Title and Subtitle).
