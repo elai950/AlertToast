@@ -48,7 +48,7 @@ After 2 seconds the alert will be dismissed or by tapping on the alert view.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
 <br>
-For showing a simple `AlertToast` text message:
+For showing a simple AlertToast text message:
 
 ```swift 
 import AlertToast
