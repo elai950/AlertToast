@@ -39,6 +39,11 @@ https://github.com/elai950/AlertToast.git
 
 If you prefer not to use any of dependency managers, you can integrate `AlertToast` into your project manually. Put `Sources/AlertToast` folder in your Xcode project. Make sure to enable `Copy items if needed` and `Create groups`.
 
+## Requirements
+
+- iOS 13.0+
+- Xcode 12.0+ | Swift 5+
+
 ## Usage
 
 The usage is very simple. Use the `.alertDialog` view modifier that expects returning `AlertToast`.
