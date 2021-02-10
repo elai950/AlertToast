@@ -7,7 +7,7 @@
 ## Overview
 **Popup like Apple Music & Feedback in AppStore**.
 
-* Built for SwiftUI.
+* Built with pure SwiftUI.
 * `Complete`, `Error` `SystemImage`, `Image` and `Regular` (Only Text).
 * Supports Light & Dark Mode.
 * Works with any kind of view builder.
