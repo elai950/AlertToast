@@ -67,7 +67,7 @@ struct ContentView: View{
             }
         }
         .alertDialog(show: $showAlert){
-            AlertToast(type: .none, title: "Message Sent!")
+            AlertToast(type: .regular, title: "Message Sent!")
         }
     }
 }
@@ -76,7 +76,7 @@ struct ContentView: View{
 Changing duration time:
 ```swift
 .alertDialog(show: $showAlert, duration: 3){
-    AlertToast(type: .none, title: "Message Sent!", subTitle: nil)
+    AlertToast(type: .regular, title: "Message Sent!", subTitle: nil)
 }
 ```
 
