@@ -79,7 +79,7 @@ public struct AlertToast: View{
         case error(Color)
         case systemImage(String, Color)
         case image(String)
-        case none
+        case regular
     }
     
     var type: AlertType
@@ -122,11 +122,11 @@ public struct AlertToast: View{
                     .scaledToFit()
                     .padding(.bottom)
                 Spacer()
-            case .none:
+            case .regular:
                 EmptyView()
             }
             
-            VStack(spacing: type == .none ? 8 : 2){
+            VStack(spacing: type == .regular ? 8 : 2){
                 Text(title)
                     .bold()
                 if subTitle != nil{
@@ -137,7 +137,7 @@ public struct AlertToast: View{
             }
         }
         .padding()
-        .withFrame(type != .none)
+        .withFrame(type != .regular)
         .background(BlurView(style: .systemMaterial))
         .cornerRadius(10)
     }
