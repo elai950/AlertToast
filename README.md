@@ -82,7 +82,8 @@ Changing duration time and adding sub title:
 
 
 For showing a complete/error alert message with animations:
-You need to choose a `Color`.
+
+- Choose a `Color` in the enum associated value.
 
 ```swift 
 .alertDialog(show: $showComplete){
@@ -97,6 +98,8 @@ You can add many `.alertDialog` for different alert popups.
 
 
 For showing a image/system image alert message:
+
+- Determine the image name and color within the enum associated values.
 
 ```swift
 .alertDialog(show: $showAlertSystemImage){
