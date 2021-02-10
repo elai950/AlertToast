@@ -47,7 +47,7 @@ After 2 seconds the alert will be dismissed or by tapping on the alert view.
 - Default duration is 2.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
-For showing a simple alert text message:
+For showing a simple `AlertToast` text message:
 
 ```swift 
 import AlertToast
@@ -67,7 +67,7 @@ struct ContentView: View{
             }
         }
         .alertDialog(show: $showAlert){
-            AlertToast(type: .none, title: "Message Sent!", subTitle: nil)
+            AlertToast(type: .none, title: "Message Sent!")
         }
     }
 }
