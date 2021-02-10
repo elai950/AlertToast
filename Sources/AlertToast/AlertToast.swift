@@ -127,10 +127,10 @@ public struct AlertToast: View{
             }
             
             VStack(spacing: type == .regular ? 8 : 2){
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .bold()
                 if subTitle != nil{
-                    Text(subTitle!)
+                    Text(LocalizedStringKey(subTitle ?? ""))
                         .font(.footnote)
                         .opacity(0.7)
                 }
