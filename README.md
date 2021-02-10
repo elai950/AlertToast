@@ -1,5 +1,6 @@
 # AlertToast-SwiftUI
 
+## Overview
 **Popup from Apple Music & Feedback in AppStore**.
 
 * For SwiftUI.
@@ -113,3 +114,15 @@ For showing a image/system image alert message:
     AlertToast(type: .image("<YOUR IMAGE NAME>"), title: "Favorited", subTitle: nil)
 }
 ```
+
+## Contributing
+
+All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
+
+## Author
+
+Elai Zuberman
+
+## License
+
+`AlertToast` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
