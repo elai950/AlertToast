@@ -49,7 +49,11 @@ After 2 seconds the alert will be dismissed or by tapping on the alert view.
 - Default duration is 2.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
-#### Presenting Regular alert
+#### Usage example with regular alert
+
+It's importent to wrap the `Binding<Bool>` with `withAnimation` function to receive the opacity animation.
+<br>
+As for now (SwiftUI 2.0), the `.transition(.opacity)` animation only works when you wrap the `Boolean` with `withAnimation`.
 
 ```swift 
 import AlertToast
