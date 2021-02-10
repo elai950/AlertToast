@@ -73,8 +73,10 @@ struct ContentView: View{
     }
 }
 ```
+
 <br>
 Changing duration time and adding sub title:
+
 ```swift
 .alertDialog(show: $showAlert, duration: 3){
     AlertToast(type: .regular, title: "Message Sent!", subTitle: "<YOUR SUBTITLE>")
