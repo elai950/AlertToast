@@ -84,9 +84,9 @@ struct ContentView: View{
 }
 ```
 
-#### Properties
+### How to
 
-Available Alert Types:
+#### Available Alert Types:
 - **Regular:** text only (Title and Subtitle).
 - **Complete:** animated checkmark.
 - **Error:** animated xmark.
