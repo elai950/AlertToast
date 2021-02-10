@@ -1,5 +1,9 @@
 # AlertToast-SwiftUI
 
+<p float="left">
+    <img src="https://user-images.githubusercontent.com/37900883/107416158-d4e58500-6b1c-11eb-8b37-9701d275e9a7.gif" width="222" />
+</p>
+
 ## Overview
 **Popup from Apple Music & Feedback in AppStore**.
 
@@ -11,10 +15,6 @@
 
 I tried to recreate Apple's alerts as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
-
-<p float="left">
-    <img src="https://user-images.githubusercontent.com/37900883/107416158-d4e58500-6b1c-11eb-8b37-9701d275e9a7.gif" width="222" />
-</p>
 
 If you like the project, don't forget to `put star ★`.
 
@@ -49,8 +49,7 @@ After 2 seconds the alert will be dismissed or by tapping on the alert view.
 - Default duration is 2.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
-<br>
-For showing a simple AlertToast text message:
+#### Presenting Regular alert
 
 ```swift 
 import AlertToast
@@ -76,44 +75,33 @@ struct ContentView: View{
 }
 ```
 
-<br>
-Changing duration time and adding sub title:
+#### Properties
+
+Available Alert Types:
+- Regular: Text only (Title and Subtitle).
+- Complete: Animated Checkmark.
+- Error: Animated XMark.
+- System Image: Name.
+- Image: Add image from Assets.
 
 ```swift
-.alertDialog(show: $showAlert, duration: 3){
-    AlertToast(type: .regular, title: "Message Sent!", subTitle: "<YOUR SUBTITLE>")
-}
+//Alert dialog view modifier:
+.alertDialog(show: Binding<Bool>, duration: Double){ () -> AlertToast }
+
+//Simple Text Alert:
+AlertToast(type: .regular, title: String, subTitle: Optional(String))
+
+//Complete/Error Alert:
+AlertToast(type: .complete(Color), title: String, subTitle: Optional(String))
+
+//System Image Alert:
+AlertToast(type: .systemImage(String, Color), title: String, subTitle: Optional(String))
+
+//Image Alert:
+AlertToast(type: .image(String), title: String, subTitle: Optional(String))
 ```
 
-<br>
-For showing a complete/error alert message with animations:
-
-- Choose a `Color` in the enum associated value.
-
-```swift 
-.alertDialog(show: $showComplete){
-    AlertToast(type: .complete(.green), title: "Complete", subTitle: nil)
-}
-.alertDialog(show: $showError){
-    AlertToast(type: .error(.red), title: "Error", subTitle: "Error code: 404")
-}
-```
-
-You can add many `.alertDialog` for different alert popups.
-
-<br>
-For showing a image/system image alert message:
-
-- Determine the image name and color within the enum associated values.
-
-```swift
-.alertDialog(show: $showAlertSystemImage){
-    AlertToast(type: .systemImage("star.fill", .yellow), title: "Favorite", subTitle: nil)
-}
-.alertDialog(show: $showAlertImage){
-    AlertToast(type: .image("<YOUR IMAGE NAME>"), title: "Favorited", subTitle: nil)
-}
-```
+You can add many `.alertDialog` on a single view.
 
 ## Contributing
 
