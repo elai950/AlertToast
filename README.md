@@ -44,6 +44,7 @@ The usage is very simple. Use the `.alertDialog` view modifier that expects retu
 After 2 seconds the alert will be dismissed or by tapping on the alert view.
 
 - Assign a state variable to `show` parameter.
+- Default duration is 2.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
 For showing a simple alert text message:
@@ -69,6 +70,13 @@ struct ContentView: View{
             AlertToast(type: .none, title: "Message Sent!", subTitle: nil)
         }
     }
+}
+```
+
+Changing duration time:
+```swift
+.alertDialog(show: $showAlert, duration: 3){
+    AlertToast(type: .none, title: "Message Sent!", subTitle: nil)
 }
 ```
 
