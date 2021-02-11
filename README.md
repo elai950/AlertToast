@@ -11,7 +11,7 @@
 * Works with any kind of view builder.
 * Localization support.
 
-I tried to recreate Apple's alerts appearance and behaivor as much as possible to be suitable for SwiftUI.
+I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
 
 If you like the project, don't forget to `put star ★`.
