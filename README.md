@@ -3,10 +3,10 @@
 <img src="https://github.com/elai950/AlertToast/blob/master/Assets/animation.gif" width="250"/>
    
 <p align="center">
-    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/regular.gif" width="200"/>
-    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/complete.gif" width="200"/>
-    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/error.gif" width="200"/>
-    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/systemImage.gif" width="200"/>
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/regular.gif" width="150"/>
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/complete.gif" width="150"/>
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/error.gif" width="150"/>
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/systemImage.gif" width="150"/>
 </p>
 
 
