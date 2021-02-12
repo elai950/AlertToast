@@ -5,6 +5,8 @@
 ## Overview
 **Popup like Apple Music & Feedback in AppStore**.
 
+<img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
+
 * Built with pure SwiftUI.
 * `Complete`, `Error` `SystemImage`, `Image` and `Regular` (Only Text).
 * Supports Light & Dark Mode.
