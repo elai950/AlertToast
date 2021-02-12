@@ -1,6 +1,6 @@
 # AlertToast-SwiftUI
 
-<img src="https://media.giphy.com/media/5eM0dUoUw1M80r2dRS/giphy.gif" />
+<img src="https://github.com/elai950/AlertToast/blob/master/Assets/animation.gif" width="222"/>
 
 ## Overview
 **Popup like Apple Music & Feedback in AppStore**.
