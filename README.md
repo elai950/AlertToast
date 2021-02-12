@@ -107,6 +107,14 @@ AlertToast(type: .image(String), title: String, subTitle: Optional(String))
 
 You can add many `.alertDialog` on a single view.
 
+## Article
+
+I wrote an article to help you understand deeper how `AlertToast` is working.
+
+You can read it here:
+
+[Medium - Presenting Apple's Music Alerts in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
+
 ## Contributing
 
 All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
