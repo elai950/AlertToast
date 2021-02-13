@@ -142,7 +142,7 @@ public struct AlertToast: View{
         return alertToast
             .padding()
             .withFrame(type != .regular)
-            .background(BlurView())
+            .background(BlurView(material: .sheet, blendingMode: .withinWindow))
             .cornerRadius(10)
         #else
         return alertToast
@@ -239,19 +239,19 @@ public struct BlurView: NSViewRepresentable {
     public typealias NSViewType = NSVisualEffectView
     
     let material: NSVisualEffectView.Material
-    
-    public init(style: NSVisualEffectView.Material = .sheet) {
-        self.material = style
-    }
-    
+    var blendingMode: NSVisualEffectView.BlendingMode
+
     public func makeNSView(context: Context) -> NSVisualEffectView {
         let effectView = NSVisualEffectView()
-        effectView.material = self.material
+        effectView.material = material
+        effectView.blendingMode = blendingMode
+        effectView.state = NSVisualEffectView.State.active
         return effectView
     }
     
     public func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
-        nsView.material = self.material
+        nsView.material = material
+        nsView.blendingMode = blendingMode
     }
 }
 
