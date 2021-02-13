@@ -140,7 +140,7 @@ public struct AlertToast: View{
         }
         .padding()
         .withFrame(type != .regular)
-        .background(BlurView(style: .systemMaterial))
+        .background(BlurView())
         .cornerRadius(10)
     }
 }
@@ -174,7 +174,7 @@ public struct AlertToastModifier: ViewModifier{
                             .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
                     }
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height, alignment: .center)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .edgesIgnoringSafeArea(.all)
                 .animation(.spring())
             )
@@ -222,6 +222,33 @@ public extension View{
     }
 }
 
+#if os(macOS)
+
+import Cocoa
+
+@available(macOS 11, *)
+public struct BlurView: NSViewRepresentable {
+    public typealias NSViewType = NSVisualEffectView
+    
+    let material: NSVisualEffectView.Material
+    
+    public init(style: NSVisualEffectView.Material = .sheet) {
+        self.material = style
+    }
+    
+    public func makeNSView(context: Context) -> NSVisualEffectView {
+        let effectView = NSVisualEffectView()
+        effectView.material = self.material
+        return effectView
+    }
+    
+    public func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+        nsView.material = self.material
+    }
+}
+
+#else
+
 @available(iOS 13, *)
 public struct BlurView: UIViewRepresentable {
     public typealias UIViewType = UIVisualEffectView
@@ -240,3 +267,5 @@ public struct BlurView: UIViewRepresentable {
         uiView.effect = UIBlurEffect(style: self.style)
     }
 }
+
+#endif // os(macOS)
