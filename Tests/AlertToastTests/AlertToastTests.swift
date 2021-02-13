@@ -2,14 +2,15 @@ import XCTest
 @testable import AlertToast
 
 final class AlertToastTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(AlertToast(type: .regular, title: "Title").title, "Hello, World!")
+    
+    func testInit() {
+        let toast = AlertToast(type: .regular, title: "Title", subTitle: "Subtitle")
+        XCTAssertEqual(toast.type, .regular)
+        XCTAssertEqual(toast.title, "Title")
+        XCTAssertEqual(toast.subTitle, "Subtitle")
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testInit", testInit),
     ]
 }
