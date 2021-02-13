@@ -17,7 +17,7 @@
 ## Overview
 **Popup like Apple Music & Feedback in AppStore**.
 
-<img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
+<img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
 
 * Built with pure SwiftUI.
 * `Complete`, `Error` `SystemImage`, `Image` and `Regular` (Only Text).
@@ -50,7 +50,7 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 ## Requirements
 
-- iOS 13.0+
+- iOS 13.0+ | macOS 11+
 - Xcode 12.0+ | Swift 5+
 
 ## Usage
