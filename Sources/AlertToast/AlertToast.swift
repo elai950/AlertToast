@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 11, *)
 struct AnimatedCheckmark: View {
     
     var color: Color = .black
@@ -33,7 +33,7 @@ struct AnimatedCheckmark: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 11, *)
 struct AnimatedXmark: View {
     
     var color: Color = .black
@@ -71,7 +71,7 @@ struct AnimatedXmark: View {
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 11, *)
 public struct AlertToast: View{
     
     public enum AlertType: Equatable{
@@ -93,59 +93,69 @@ public struct AlertToast: View{
     }
     
     public var body: some View{
-        VStack{
-            
-            switch type{
-            case .complete(let color):
-                Spacer()
-                AnimatedCheckmark(color: color, size: 50)
-                Spacer()
-            case .error(let color):
-                Spacer()
-                AnimatedXmark(color: color, size: 50)
-                Spacer()
-            case .systemImage(let name, let color):
-                Spacer()
-                Image(systemName: name)
-                    .renderingMode(.template)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .scaledToFit()
-                    .foregroundColor(color)
-                    .padding(.bottom)
-                Spacer()
-            case .image(let name):
-                Spacer()
-                Image(name)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .scaledToFit()
-                    .padding(.bottom)
-                Spacer()
-            case .regular:
-                EmptyView()
-            }
-            
-            VStack(spacing: type == .regular ? 8 : 2){
-                Text(LocalizedStringKey(title))
-                    .bold()
-                    .multilineTextAlignment(.center)
-                if subTitle != nil{
-                    Text(LocalizedStringKey(subTitle ?? ""))
-                        .font(.footnote)
-                        .opacity(0.7)
+        let alertToast = VStack{
+                switch type{
+                case .complete(let color):
+                    Spacer()
+                    AnimatedCheckmark(color: color, size: 50)
+                    Spacer()
+                case .error(let color):
+                    Spacer()
+                    AnimatedXmark(color: color, size: 50)
+                    Spacer()
+                case .systemImage(let name, let color):
+                    Spacer()
+                    Image(systemName: name)
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
+                        .foregroundColor(color)
+                        .padding(.bottom)
+                    Spacer()
+                case .image(let name):
+                    Spacer()
+                    Image(name)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
+                        .padding(.bottom)
+                    Spacer()
+                case .regular:
+                    EmptyView()
+                }
+                
+                VStack(spacing: type == .regular ? 8 : 2){
+                    Text(LocalizedStringKey(title))
+                        .bold()
                         .multilineTextAlignment(.center)
+                    if subTitle != nil{
+                        Text(LocalizedStringKey(subTitle ?? ""))
+                            .font(.footnote)
+                            .opacity(0.7)
+                            .multilineTextAlignment(.center)
+                    }
                 }
             }
-        }
-        .padding()
-        .withFrame(type != .regular)
-        .background(BlurView())
-        .cornerRadius(10)
+        
+        #if os(macOS)
+        return alertToast
+            .padding()
+            .withFrame(type != .regular)
+            .background(BlurView())
+            .cornerRadius(10)
+        #else
+        return alertToast
+            .padding()
+            .withFrame(type != .regular)
+            .background(BlurView(style: .systemMaterial))
+            .cornerRadius(10)
+        #endif
+
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 11, *)
 public struct AlertToastModifier: ViewModifier{
     
     @Binding var show: Bool
@@ -182,7 +192,7 @@ public struct AlertToastModifier: ViewModifier{
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 11, *)
 public struct WithFrameModifier: ViewModifier{
     
     var withFrame: Bool
@@ -201,7 +211,7 @@ public struct WithFrameModifier: ViewModifier{
     }
 }
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 11, *)
 public extension View{
     
     /// Return some view w/o frame depends on the condition.
@@ -223,8 +233,6 @@ public extension View{
 }
 
 #if os(macOS)
-
-import Cocoa
 
 @available(macOS 11, *)
 public struct BlurView: NSViewRepresentable {
