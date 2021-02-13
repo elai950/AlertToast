@@ -151,7 +151,7 @@ public struct AlertToast: View{
         return alert
             .padding()
             .withFrame(type != .regular)
-            .background(BlurView(style: .regular))
+            .background(BlurView(style: .systemUltraThinMaterial))
             .cornerRadius(10)
         #endif
         
