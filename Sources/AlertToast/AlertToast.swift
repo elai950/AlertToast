@@ -92,66 +92,69 @@ public struct AlertToast: View{
         self.subTitle = subTitle
     }
     
-    public var body: some View{
-        let alertToast = VStack{
-                switch type{
-                case .complete(let color):
-                    Spacer()
-                    AnimatedCheckmark(color: color, size: 50)
-                    Spacer()
-                case .error(let color):
-                    Spacer()
-                    AnimatedXmark(color: color, size: 50)
-                    Spacer()
-                case .systemImage(let name, let color):
-                    Spacer()
-                    Image(systemName: name)
-                        .renderingMode(.template)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .scaledToFit()
-                        .foregroundColor(color)
-                        .padding(.bottom)
-                    Spacer()
-                case .image(let name):
-                    Spacer()
-                    Image(name)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .scaledToFit()
-                        .padding(.bottom)
-                    Spacer()
-                case .regular:
-                    EmptyView()
-                }
-                
-                VStack(spacing: type == .regular ? 8 : 2){
-                    Text(LocalizedStringKey(title))
-                        .bold()
+    public var alert: some View{
+        VStack{
+            switch type{
+            case .complete(let color):
+                Spacer()
+                AnimatedCheckmark(color: color, size: 50)
+                Spacer()
+            case .error(let color):
+                Spacer()
+                AnimatedXmark(color: color, size: 50)
+                Spacer()
+            case .systemImage(let name, let color):
+                Spacer()
+                Image(systemName: name)
+                    .renderingMode(.template)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
+                    .foregroundColor(color)
+                    .padding(.bottom)
+                Spacer()
+            case .image(let name):
+                Spacer()
+                Image(name)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
+                    .padding(.bottom)
+                Spacer()
+            case .regular:
+                EmptyView()
+            }
+            
+            VStack(spacing: type == .regular ? 8 : 2){
+                Text(LocalizedStringKey(title))
+                    .bold()
+                    .multilineTextAlignment(.center)
+                if subTitle != nil{
+                    Text(LocalizedStringKey(subTitle ?? ""))
+                        .font(.footnote)
+                        .opacity(0.7)
                         .multilineTextAlignment(.center)
-                    if subTitle != nil{
-                        Text(LocalizedStringKey(subTitle ?? ""))
-                            .font(.footnote)
-                            .opacity(0.7)
-                            .multilineTextAlignment(.center)
-                    }
                 }
             }
+        }
+    }
+    
+    public var body: some View{
         
         #if os(macOS)
-        return alertToast
+        return alert
             .padding()
             .withFrame(type != .regular)
             .background(BlurView(material: .sheet, blendingMode: .withinWindow))
             .cornerRadius(10)
         #else
-        return alertToast
+        return alert
             .padding()
             .withFrame(type != .regular)
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(10)
         #endif
-
+        
     }
 }
 
@@ -240,7 +243,7 @@ public struct BlurView: NSViewRepresentable {
     
     let material: NSVisualEffectView.Material
     var blendingMode: NSVisualEffectView.BlendingMode
-
+    
     public func makeNSView(context: Context) -> NSVisualEffectView {
         let effectView = NSVisualEffectView()
         effectView.material = material
