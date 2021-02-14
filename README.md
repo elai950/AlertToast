@@ -113,7 +113,7 @@ struct ContentView: View{
 
 #### Alert dialog view modifier (with default settings):
 ```swift
-.presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: TRUE, alert: () -> AlertToast, completion: (Bool) -> ())
+.presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
 ```
 
 #### A full AlertToast implementation:
