@@ -20,7 +20,7 @@
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
 
 * Built with pure SwiftUI.
-* `Complete`, `Error` `SystemImage`, `Image` and `Regular` (Only Text).
+* `Complete`, `Error` `SystemImage`, `Image`, `Loading`, and `Regular` (Only Text).
 * Supports Light & Dark Mode.
 * Works with any kind of view builder.
 * Localization support.
@@ -55,19 +55,15 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 ## 🛠 Usage
 
-The usage is very simple. Use the `.alertDialog` view modifier that expects returning `AlertToast`.
+The usage is very simple. Use the `.presentAlert` view modifier that expects returning `AlertToast`.
 
 After 2 seconds the alert will be dismissed or by tapping on the alert view.
 
-- Assign a state variable to `show` parameter.
-- Default duration is 2.
+- Assign a state variable to `isPresenting` parameter.
+- Default duration is 2. Set 0 to disable auto dismiss.
 - Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
 
 #### Usage example with regular alert
-
-It's importent to wrap the `Binding<Bool>` with `withAnimation` function to receive the opacity animation.
-<br>
-As for now (SwiftUI 2.0), the `.transition(.opacity)` animation only works when you wrap the `Boolean` with `withAnimation`.
 
 ```swift 
 import AlertToast
@@ -81,16 +77,26 @@ struct ContentView: View{
         VStack{
 
             Button("Show Alert"){
-                withAnimation(.spring()){
-                    showAlert.toggle()
-                }
+                 showAlert.toggle()
             }
         }
-        .alertDialog(show: $showAlert){
+        .presentAlert(isPresenting: $showAlert){
             AlertToast(type: .regular, title: "Message Sent!")
         }
     }
 }
+```
+
+### Complete Modifier Example
+
+```swift
+.presentAlert(isPresenting: $viewModel.show, duration: 2, tapToDismiss: true, alert: {
+   
+   //AlertToast Goes Here
+   
+}, completion: { dismissed in
+   //Completion block after dismiss (returns true)
+})
 ```
 
 ### Parameters
@@ -101,25 +107,29 @@ struct ContentView: View{
 - **Error:** animated xmark.
 - **System Image:** name image from `SFSymbols`.
 - **Image:** name image from Assets.
+- **Loading:** Activity Indicator (Spinner).
 
 ```swift
-//Alert dialog view modifier:
-.alertDialog(show: Binding<Bool>, duration: Double){ () -> AlertToast }
+//Alert dialog view modifier (with default settings):
+.presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: TRUE, alert: () -> AlertToast, completion: (Bool) -> ())
 
 //Simple Text Alert:
-AlertToast(type: .regular, title: String, subTitle: Optional(String))
+AlertToast(type: .regular, title: Optional(String), subTitle: Optional(String))
 
 //Complete/Error Alert:
-AlertToast(type: .complete(Color)/.error(Color), title: String, subTitle: Optional(String))
+AlertToast(type: .complete(Color)/.error(Color), title: Optional(String), subTitle: Optional(String))
 
 //System Image Alert:
-AlertToast(type: .systemImage(String, Color), title: String, subTitle: Optional(String))
+AlertToast(type: .systemImage(String, Color), title: Optional(String), subTitle: Optional(String))
 
 //Image Alert:
-AlertToast(type: .image(String), title: String, subTitle: Optional(String))
+AlertToast(type: .image(String), title: Optional(String), subTitle: Optional(String))
+
+//Loading Alert:
+AlertToast(type: .loading, title: Optional(String), subTitle: Optional(String))
 ```
 
-You can add many `.alertDialog` on a single view.
+You can add many `.presentAlert` on a single view.
 
 ## 📖 Article
 
