@@ -32,7 +32,7 @@ If you like the project, don't forget to `put star ★`.
 
 <a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>&nbsp;&nbsp;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5JN5PT55NAHKU" target="_blank"><img src="https://img.shields.io/badge/Donate-informational?style=for-the-badge&logo=paypal&logoColor=white" ></a>
 
-## Installation
+## 💻 Installation
 
 ### Swift Package Manager
 
@@ -48,12 +48,12 @@ https://github.com/elai950/AlertToast.git
 
 If you prefer not to use any of dependency managers, you can integrate `AlertToast` into your project manually. Put `Sources/AlertToast` folder in your Xcode project. Make sure to enable `Copy items if needed` and `Create groups`.
 
-## Requirements
+## 🧳 Requirements
 
 - iOS 13.0+ | macOS 11+
 - Xcode 12.0+ | Swift 5+
 
-## Usage
+## 🛠 Usage
 
 The usage is very simple. Use the `.alertDialog` view modifier that expects returning `AlertToast`.
 
@@ -121,7 +121,7 @@ AlertToast(type: .image(String), title: String, subTitle: Optional(String))
 
 You can add many `.alertDialog` on a single view.
 
-## Article
+## 📖 Article
 
 I wrote an article to help you understand deeper how `AlertToast` is working.
 
@@ -129,14 +129,14 @@ You can read it here:
 
 [Medium - Presenting Apple's Music Alerts in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
 
-## Contributing
+## 👨‍💻 Contributing
 
 All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
 
-## Author
+## ✍️ Author
 
 Elai Zuberman
 
-## License
+## 📃 License
 
 `AlertToast` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
