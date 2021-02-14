@@ -111,26 +111,38 @@ struct ContentView: View{
 - **Image:** name image from Assets.
 - **Loading:** Activity Indicator (Spinner).
 
+#### Alert dialog view modifier (with default settings):
 ```swift
-//Alert dialog view modifier (with default settings):
 .presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: TRUE, alert: () -> AlertToast, completion: (Bool) -> ())
+```
 
-//A full AlertToast implementation:
+#### A full AlertToast implementation:
+```swift
 AlertToast(type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
+```
 
-//Simple Text Alert:
+#### Simple Text Alert:
+```swift
 AlertToast(type: .regular, title: Optional(String), subTitle: Optional(String))
+```
 
-//Complete/Error Alert:
+#### Complete/Error Alert:
+```swift
 AlertToast(type: .complete(Color)/.error(Color), title: Optional(String), subTitle: Optional(String))
+```
 
-//System Image Alert:
+#### System Image Alert:
+```swift
 AlertToast(type: .systemImage(String, Color), title: Optional(String), subTitle: Optional(String))
+```
 
-//Image Alert:
+#### Image Alert:
+```swift
 AlertToast(type: .image(String), title: Optional(String), subTitle: Optional(String))
+```
 
-//Loading Alert:
+#### Loading Alert:
+```swift
 AlertToast(type: .loading, title: Optional(String), subTitle: Optional(String))
 ```
 
