@@ -62,7 +62,8 @@ After 2 seconds the alert will be dismissed or by tapping on the alert view.
 
 - Assign a state variable to `isPresenting` parameter.
 - Default duration is 2. Set 0 to disable auto dismiss.
-- Return `AlertToast` and fulfill the parameters: `type`, `title`, and `subTitle` (Optional).
+- Set `tapToDismiss` to `false` to disable dismiss by tap.
+- Return `AlertToast` and fulfill the parameters you want.
 
 #### Usage example with regular alert
 
