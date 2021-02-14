@@ -24,6 +24,7 @@
 * Supports Light & Dark Mode.
 * Works with any kind of view builder.
 * Localization support.
+* Supports font customization.
 
 I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
@@ -112,6 +113,9 @@ struct ContentView: View{
 ```swift
 //Alert dialog view modifier (with default settings):
 .presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: TRUE, alert: () -> AlertToast, completion: (Bool) -> ())
+
+//A full AlertToast implementation:
+AlertToast(type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
 
 //Simple Text Alert:
 AlertToast(type: .regular, title: Optional(String), subTitle: Optional(String))
