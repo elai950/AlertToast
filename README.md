@@ -92,7 +92,7 @@ struct ContentView: View{
 #### Complete Modifier Example
 
 ```swift
-.presentAlert(isPresenting: $viewModel.show, duration: 2, tapToDismiss: true, alert: {
+.presentAlert(isPresenting: $showAlert, duration: 2, tapToDismiss: true, alert: {
    
    //AlertToast Goes Here
    
