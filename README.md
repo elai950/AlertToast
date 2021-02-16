@@ -169,9 +169,7 @@ You can add many `.presentAlert` on a single view.
 
 ## 📖 Article
 
-I wrote an article to help you understand deeper how `AlertToast` is working.
-
-You can read it here:
+I wrote an article that contains more usage exmaples.
 
 [Medium - Presenting Apple's Music Alerts in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
 
