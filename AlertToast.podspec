@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AlertToast"
-  spec.version      = "1.0.8"
+  spec.version      = "1.0.9"
   spec.summary      = "A popup alert like Apple Music & AppStore feedback."
 
   # This description is used to generate tags and improve search results.
@@ -116,8 +116,8 @@ Pod::Spec.new do |spec|
   #  the lib prefix of their name.
   #
 
-  spec.framework  = "SwiftUI"
-  spec.ios.frameworks = "SwiftUI", "UIKit"
+  # spec.framework  = "SwiftUI"
+  # spec.ios.frameworks = "SwiftUI", "UIKit"
 
   # spec.library   = "iconv"
   # spec.libraries = "iconv", "xml2"
