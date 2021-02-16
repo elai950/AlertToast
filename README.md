@@ -4,9 +4,6 @@
    
 <p align="center">
    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/animation.gif" width="250"/>
-</p>
-
-<p align="center">
    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/AlertToastSignInDemo.gif" width="250"/>
 </p>
 
@@ -53,6 +50,8 @@ pod 'AlertToast'
 ```
 Don't forget to add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
+------
+
 ### Swift Package Manager
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
@@ -62,6 +61,8 @@ To integrate `AlertToast` into your Xcode project using Xcode 12, specify it in 
 ```ogdl
 https://github.com/elai950/AlertToast.git
 ```
+
+------
 
 ### Manually
 
