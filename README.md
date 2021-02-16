@@ -41,6 +41,8 @@ If you like the project, don't forget to `put star ★`.
 
 ### Cocoapods
 
+[AlertToast Cocapods Website](https://cocoapods.org/pods/AlertToast)
+
 CocoaPods is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate `AlertToast` into your Xcode project using CocoaPods, specify it in your Podfile:
 
 ```ruby
