@@ -49,9 +49,6 @@ use_frameworks!
 
 pod 'AlertToast'
 ```
-
-Be sure your are in your project directory and then use `pod install` in your terminal.
-
 Don't forget to add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
 ### Swift Package Manager
