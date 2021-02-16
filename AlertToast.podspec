@@ -17,7 +17,6 @@ Pod::Spec.new do |spec|
 
   spec.name         = "AlertToast"
   spec.version      = "1.0.8"
-  spec.swift_version = '5.0'
   spec.summary      = "A popup alert like Apple Music & AppStore feedback."
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +24,7 @@ Pod::Spec.new do |spec|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  
+
   spec.description  = "I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI. You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music."
 
   spec.homepage     = "https://github.com/elai950/AlertToast"
@@ -64,10 +63,10 @@ Pod::Spec.new do |spec|
   #
 
   # spec.platform     = :ios
-  spec.platform     = :ios, "5.0"
+  spec.platform     = :ios, "13.0"
 
   #  When using multiple platforms
-  spec.ios.deployment_target = "13.0"
+  # spec.ios.deployment_target = "13.0"
   # spec.osx.deployment_target = "10.7"
   # spec.watchos.deployment_target = "2.0"
   # spec.tvos.deployment_target = "9.0"
@@ -90,8 +89,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Sources/**/*.swift"
-  
+  spec.source_files  = "Sources/AlertToast/**/*.swift"
+
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
@@ -117,7 +116,7 @@ Pod::Spec.new do |spec|
   #  the lib prefix of their name.
   #
 
-  spec.framework  = "SystemConfiguration"
+  spec.framework  = "SwiftUI"
   spec.ios.frameworks = "SwiftUI", "UIKit"
 
   # spec.library   = "iconv"
@@ -130,8 +129,9 @@ Pod::Spec.new do |spec|
   #  where they will only apply to your library. If you depend on other Podspecs
   #  you can include multiple dependencies to ensure it works.
 
-  # spec.requires_arc = true
-
+  spec.requires_arc = true
+  spec.swift_version = '5.1'
+  spec.swift_versions = '5.1'
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "~> 1.4"
 
