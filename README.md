@@ -43,9 +43,6 @@ If you like the project, don't forget to `put star ★`.
 CocoaPods is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate `AlertToast` into your Xcode project using CocoaPods, specify it in your Podfile:
 
 ```ruby
-platform :ios, '13.0'
-use_frameworks!
-
 pod 'AlertToast'
 ```
 Don't forget to add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
