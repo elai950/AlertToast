@@ -1,4 +1,4 @@
-# AlertToast-SwiftUI
+# Alert Toast SwiftUI
 <p align="center">
    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/GithubCover.png" width="480"/>
 </p>
