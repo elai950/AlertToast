@@ -18,7 +18,7 @@
 
 <p align="center">
    
-   [More Gif Examples](https://github.com/elai950/AlertToast/blob/gh-pages/Assets)
+   [More Gif Examples](https://elai950.github.io/AlertToast/Assets)
    
 </p>
 
