@@ -1,13 +1,19 @@
 # Alert Toast for SwiftUI
 <p align="center">
-   <img src="Assets/GithubCover.png" width="480"/>
+<!--    <img src="Assets/GithubCover.png" width="480"/> -->
+   
+   <img src="https://elai950.github.io/AlertToast/Assets/GithubCover.png" width="480" />
 </p>
 
 ## 🌄 Examples
 <p align="center">
- <img src="Assets/complete.gif" width="150"/>
+<!--  <img src="Assets/complete.gif" width="150"/>
  <img src="Assets/error.gif" width="150"/>
- <img src="Assets/systemImage.gif" width="150"/>
+ <img src="Assets/systemImage.gif" width="150"/> -->
+
+   <img src="https://elai950.github.io/AlertToast/Assets/complete.gif" width="150" />
+   <img src="https://elai950.github.io/AlertToast/Assets/error.gif" width="150" />
+<img src="https://elai950.github.io/AlertToast/Assets/systemImage.gif" width="150" />
 </p>
 
 <p align="center">
