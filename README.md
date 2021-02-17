@@ -174,7 +174,7 @@ AlertToast(type: .image(String), title: Optional(String), subTitle: Optional(Str
 
 #### Loading Alert:
 ```swift
-//When using loading, set the duation at the .presentAlert mofifier to 0.
+//When using loading, set the duration at the .presentAlert modifier to 0.
 AlertToast(type: .loading, title: Optional(String), subTitle: Optional(String))
 ```
 
