@@ -34,6 +34,21 @@ If you like the project, don't forget to `put star ★`.
 
 <a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>&nbsp;&nbsp;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5JN5PT55NAHKU" target="_blank"><img src="https://img.shields.io/badge/Donate-informational?style=for-the-badge&logo=paypal&logoColor=white" ></a>
 
+## Navigate
+
+- [Installation](#-installation)
+    - [CocoaPods](#cocoapods)
+    - [Swift Package Manager](#swift-package-manager)
+    - [Manually](#manually)
+- [Usage](#-usage)
+    - [Usage example with regular alert](#usage-example-with-regular-alert)
+    - [Complete Modifier Example](#complete-modifier-example)
+    - [Parameters](#parameters)
+ - [Article](#-article)
+ - [Contributing](#-contributing)
+ - [Author](#-author)
+ - [License](#-license)
+
 ## 💻 Installation
 
 ### Cocoapods
