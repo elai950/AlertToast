@@ -16,12 +16,6 @@
 <img src="https://elai950.github.io/AlertToast/Assets/systemImage.gif" width="150" />
 </p>
 
-<p align="center">
-   
-   [More Gif Examples](https://elai950.github.io/AlertToast/Assets)
-   
-</p>
-
 ## 🔭 Overview
 **Popup like Apple Music & Feedback in AppStore**.
 
