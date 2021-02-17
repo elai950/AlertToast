@@ -13,6 +13,7 @@
 <p align="center">
    
    [More Gif Examples](https://github.com/elai950/AlertToast/blob/gh-pages/Assets)
+   
 </p>
 
 ## 🔭 Overview
