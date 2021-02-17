@@ -1,6 +1,6 @@
 # AlertToast-SwiftUI
 <p align="center">
-   <img src="https://github.com/elai950/AlertToast/blob/master/Assets/GithubCover.png" width="720"/>
+   <img src="https://github.com/elai950/AlertToast/blob/master/Assets/GithubCover.png" width="480"/>
 </p>
 
 ## 🌄 Examples
