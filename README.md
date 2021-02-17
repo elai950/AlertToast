@@ -72,9 +72,9 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 ## 🛠 Usage
 
-The usage is very simple. Use the `.presentAlert` view modifier that expects returning `AlertToast`.
+The usage is very simple. Use the `.presentAlert` view modifier that expects `AlertToast`.
 
-After 2 seconds the alert will be dismissed or by tapping on the alert view.
+After 2 seconds the alert will be dismissed (Tap to dismiss is true by default).
 
 - Assign a state variable to `isPresenting` parameter.
 - Default duration is 2. Set 0 to disable auto dismiss.
