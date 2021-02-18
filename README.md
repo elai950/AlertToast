@@ -151,7 +151,7 @@ struct ContentView: View{
 
 #### A full AlertToast implementation:
 ```swift
-AlertToast(type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
+AlertToast(displayMode: DisplayMode, type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
 ```
 
 #### Simple Text Alert:
