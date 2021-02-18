@@ -9,9 +9,9 @@ import SwiftUI
 
 #if os(macOS)
 @available(macOS 11, *)
-struct ProgressIndicator: NSViewRepresentable {
+struct ActivityIndicator: NSViewRepresentable {
     
-    func makeNSView(context: NSViewRepresentableContext<ProgressIndicator>) -> NSProgressIndicator {
+    func makeNSView(context: NSViewRepresentableContext<ActivityIndicator>) -> NSProgressIndicator {
         let nsView = NSProgressIndicator()
         
         nsView.isIndeterminate = true
@@ -21,7 +21,7 @@ struct ProgressIndicator: NSViewRepresentable {
         return nsView
     }
     
-    func updateNSView(_ nsView: NSProgressIndicator, context: NSViewRepresentableContext<ProgressIndicator>) {
+    func updateNSView(_ nsView: NSProgressIndicator, context: NSViewRepresentableContext<ActivityIndicator>) {
     }
 }
 #else
