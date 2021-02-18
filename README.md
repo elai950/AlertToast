@@ -3,16 +3,10 @@
    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/GithubCover.png" width="480"/>
 </p>
 
-## 🌄 Examples
-<p align="center">
- <img src="https://github.com/elai950/AlertToast/blob/master/Assets/complete.gif" width="150"/>
- <img src="https://github.com/elai950/AlertToast/blob/master/Assets/error.gif" width="150"/>
- <img src="https://github.com/elai950/AlertToast/blob/master/Assets/systemImage.gif" width="150"/>
-</p>
+## 🌄 Example
 
 <p align="center">
-   
-   [More Gif Examples](https://github.com/elai950/AlertToast/blob/master/Assets)
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/onboarding.png"/>
 </p>
 
 ## 🔭 Overview
