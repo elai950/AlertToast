@@ -87,14 +87,14 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 First, add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
-Use the `.presentAlert` view modifier that expects `AlertToast`.
+Use the `.presentAlert`.
 
-After 2 seconds the alert will be dismissed (Tap to dismiss is true by default).
+**Parameters:**
 
-- Assign a state variable to `isPresenting` parameter.
-- Default duration is 2. Set 0 to disable auto dismiss.
-- Set `tapToDismiss` to `false` to disable dismiss by tap.
-- Return `AlertToast` and fulfill the parameters you want.
+- `isPresenting`: (MUST) assign a `Binding<Bool>` to show or dismiss alert.
+- `duration`: default is 2, set 0 to disable auto dismiss.
+- `tapToDismiss`: default is `true`, set `false` to disable.
+- `alert`: (MUST) expects to receive `AlertToast`.
 
 #### Usage example with regular alert
 
@@ -115,10 +115,10 @@ struct ContentView: View{
         }
         .presentAlert(isPresenting: $showAlert){
 
-            //This is the default displayMode
+            // `.alert` is the default displayMode
             AlertToast(displayMode: .alert, type: .regular, title: "Message Sent!")
             
-            //Change to .hud to toast alert from the top of the screen
+            //Choose .hud to toast alert from the top of the screen
             AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
         }
     }
