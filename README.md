@@ -42,7 +42,7 @@ If you like the project, don't forget to `put star ★`.
 - [Usage](#-usage)
     - [Usage example with regular alert](#usage-example-with-regular-alert)
     - [Complete Modifier Example](#complete-modifier-example)
-    - [Parameters](#parameters)
+    - [Alert Toast Parameters](#alert-toast-parameters)
  - [Article](#-article)
  - [Contributing](#-contributing)
  - [Author](#-author)
@@ -137,7 +137,7 @@ struct ContentView: View{
 })
 ```
 
-### Parameters
+### Alert Toast Parameters
 
 #### Available Alert Types:
 - **Regular:** text only (Title and Subtitle).
