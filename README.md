@@ -59,7 +59,6 @@ CocoaPods is a dependency manager for Cocoa projects. For usage and installation
 ```ruby
 pod 'AlertToast'
 ```
-Don't forget to add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
 ------
 
@@ -86,7 +85,9 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 ## 🛠 Usage
 
-The usage is very simple. Use the `.presentAlert` view modifier that expects `AlertToast`.
+First, add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
+
+Use the `.presentAlert` view modifier that expects `AlertToast`.
 
 After 2 seconds the alert will be dismissed (Tap to dismiss is true by default).
 
