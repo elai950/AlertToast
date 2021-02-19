@@ -179,7 +179,7 @@ AlertToast(type: .image(String), title: Optional(String), subTitle: Optional(Str
 
 #### Loading Alert:
 ```swift
-//When using loading, set the duration at the .presentAlert modifier to 0.
+//When using loading, duration won't auto dismiss and tapToDismiss is set to false
 AlertToast(type: .loading, title: Optional(String), subTitle: Optional(String))
 ```
 
