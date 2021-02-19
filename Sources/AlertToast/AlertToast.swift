@@ -251,8 +251,8 @@ public struct AlertToast: View{
 public struct AlertToastModifier: ViewModifier{
     
     @Binding var isPresenting: Bool
-    var duration: Double = 2
-    var tapToDismiss: Bool = true
+    @State var duration: Double = 2
+    @State var tapToDismiss: Bool = true
     var alert: () -> AlertToast
     var completion: ((Bool) -> ())? = nil
     
@@ -297,6 +297,12 @@ public struct AlertToastModifier: ViewModifier{
                         case .alert:
                             alert()
                                 .onAppear {
+                                    
+                                    if alert().type == .loading{
+                                        duration = 0
+                                        tapToDismiss = false
+                                    }
+                                    
                                     if duration > 0{
                                         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                                             withAnimation(.spring()){
@@ -333,6 +339,12 @@ public struct AlertToastModifier: ViewModifier{
                                     }
                                 )
                                 .onAppear {
+                                    
+                                    if alert().type == .loading{
+                                        duration = 0
+                                        tapToDismiss = false
+                                    }
+                                    
                                     if duration > 0{
                                         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                                             withAnimation(.spring()){
@@ -424,4 +436,3 @@ fileprivate extension Text{
         }
     }
 }
-
