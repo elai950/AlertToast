@@ -1,27 +1,24 @@
-# Alert Toast for SwiftUI
+# AlertToast-SwiftUI [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20over%20170%20free%20design%20blocks%20based%20on%20Bootstrap%204&url=https://froala.com/design-blocks&via=froala&hashtags=bootstrap,design,templates,blocks,developers)
+
 <p align="center">
-<!--    <img src="Assets/GithubCover.png" width="480"/> -->
-   
-   <img src="https://elai950.github.io/AlertToast/Assets/GithubCover.png" width="480" />
+   <img src="https://github.com/elai950/AlertToast/blob/master/Assets/GithubCoverNew.png" width="480"/>
 </p>
 
-## 🌄 Examples
-<p align="center">
-<!--  <img src="Assets/complete.gif" width="150"/>
- <img src="Assets/error.gif" width="150"/>
- <img src="Assets/systemImage.gif" width="150"/> -->
+## 🌄 Example
 
-   <img src="https://elai950.github.io/AlertToast/Assets/complete.gif" width="150" />
-   <img src="https://elai950.github.io/AlertToast/Assets/error.gif" width="150" />
-<img src="https://elai950.github.io/AlertToast/Assets/systemImage.gif" width="150" />
+<p align="center">
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/onboarding.png"/>
 </p>
 
 ## 🔭 Overview
-**Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups like Apple Music & Feedback in AppStore alerts. It's easy to implement, and flexible for changing the alert toast appearance. You can toast a Complete Alert, Error Alert, Loading Alert and more!**
+**Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups like Apple Music & Feedback in AppStore alerts.**
+
+**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance. You can toast a Complete Alert, Error, Loading and more!**
 
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
 
 * Built with pure SwiftUI.
+* 2 Display modes: `Alert` (pop at the center), `HUD` (drop from the top).
 * `Complete`, `Error` `SystemImage`, `Image`, `Loading`, and `Regular` (Only Text).
 * Supports Light & Dark Mode.
 * Works with any kind of view builder.
@@ -35,6 +32,8 @@ If you like the project, don't forget to `put star ★`.
 
 <a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>&nbsp;&nbsp;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5JN5PT55NAHKU" target="_blank"><img src="https://img.shields.io/badge/Donate-informational?style=for-the-badge&logo=paypal&logoColor=white" ></a>
 
+<a href="https://www.producthunt.com/posts/alerttoast?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-alerttoast" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=284955&theme=light" alt="AlertToast - Create Apple-like alerts using SwiftUI | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 ## Navigation
 
 - [Installation](#-installation)
@@ -44,7 +43,7 @@ If you like the project, don't forget to `put star ★`.
 - [Usage](#-usage)
     - [Usage example with regular alert](#usage-example-with-regular-alert)
     - [Complete Modifier Example](#complete-modifier-example)
-    - [Parameters](#parameters)
+    - [Alert Toast Parameters](#alert-toast-parameters)
  - [Article](#-article)
  - [Contributing](#-contributing)
  - [Author](#-author)
@@ -61,7 +60,6 @@ CocoaPods is a dependency manager for Cocoa projects. For usage and installation
 ```ruby
 pod 'AlertToast'
 ```
-Don't forget to add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
 ------
 
@@ -88,14 +86,16 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 ## 🛠 Usage
 
-The usage is very simple. Use the `.presentAlert` view modifier that expects `AlertToast`.
+First, add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
-After 2 seconds the alert will be dismissed (Tap to dismiss is true by default).
+Then, use the `.presentAlert` view modifier:
 
-- Assign a state variable to `isPresenting` parameter.
-- Default duration is 2. Set 0 to disable auto dismiss.
-- Set `tapToDismiss` to `false` to disable dismiss by tap.
-- Return `AlertToast` and fulfill the parameters you want.
+**Parameters:**
+
+- `isPresenting`: (MUST) assign a `Binding<Bool>` to show or dismiss alert.
+- `duration`: default is 2, set 0 to disable auto dismiss.
+- `tapToDismiss`: default is `true`, set `false` to disable.
+- `alert`: (MUST) expects to receive `AlertToast`.
 
 #### Usage example with regular alert
 
@@ -115,7 +115,12 @@ struct ContentView: View{
             }
         }
         .presentAlert(isPresenting: $showAlert){
-            AlertToast(type: .regular, title: "Message Sent!")
+
+            // `.alert` is the default displayMode
+            AlertToast(displayMode: .alert, type: .regular, title: "Message Sent!")
+            
+            //Choose .hud to toast alert from the top of the screen
+            AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
         }
     }
 }
@@ -133,7 +138,7 @@ struct ContentView: View{
 })
 ```
 
-### Parameters
+### Alert Toast Parameters
 
 #### Available Alert Types:
 - **Regular:** text only (Title and Subtitle).
@@ -150,7 +155,7 @@ struct ContentView: View{
 
 #### A full AlertToast implementation:
 ```swift
-AlertToast(type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
+AlertToast(displayMode: DisplayMode, type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
 ```
 
 #### Simple Text Alert:
@@ -175,7 +180,7 @@ AlertToast(type: .image(String), title: Optional(String), subTitle: Optional(Str
 
 #### Loading Alert:
 ```swift
-//When using loading, set the duation at the .presentAlert mofifier to 0.
+//When using loading, duration won't auto dismiss and tapToDismiss is set to false
 AlertToast(type: .loading, title: Optional(String), subTitle: Optional(String))
 ```
 
@@ -185,7 +190,7 @@ You can add many `.presentAlert` on a single view.
 
 I wrote an article that contains more usage exmaples.
 
-[Medium - Presenting Apple's Music Alerts in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
+[Medium - How to toast an alert in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
 
 ## 👨‍💻 Contributing
 
