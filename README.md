@@ -87,7 +87,7 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 First, add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
-Use the `.presentAlert`.
+Then, use the `.presentAlert` view modifier:
 
 **Parameters:**
 
