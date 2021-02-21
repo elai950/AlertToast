@@ -31,7 +31,7 @@ Alert Toast is an open-source library in Github to use with SwiftUI. It allows y
 I recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback, after you add a song to your library in Apple Music, or when you connect Airpods to iPhone.
 
-If you like the project, don't forget to `put star ★`.
+**If you like the project, don't forget to `put star ★`.**
 
 <a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>&nbsp;&nbsp;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5JN5PT55NAHKU" target="_blank"><img src="https://img.shields.io/badge/Donate-informational?style=for-the-badge&logo=paypal&logoColor=white" ></a>
 
