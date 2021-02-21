@@ -138,6 +138,26 @@ public struct AlertToast: View{
     ///When `nil` background is `VisualEffectBlur`
     public var backgroundColor: Color?
     
+    public init(displayMode: DisplayMode = .alert,
+                type: AlertType,
+                title: String? = nil,
+                subTitle: String? = nil,
+                titleFont: Font? = .body,
+                subTitleFont: Font? = .footnote,
+                boldTitle: Bool? = true,
+                backgroundColor: Color? = nil){
+        
+        self.displayMode = displayMode
+        self.type = type
+        self.title = title
+        self.subTitle = subTitle
+        self.titleFont = titleFont
+        self.subTitleFont = subTitleFont
+        self.boldTitle = boldTitle
+        self.backgroundColor = backgroundColor
+        
+    }
+    
     ///HUD View
     public var hud: some View{
         VStack{
