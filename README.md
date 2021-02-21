@@ -11,9 +11,12 @@
 </p>
 
 ## 🔭 Overview
-**Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups like Apple Music & Feedback in AppStore alerts.**
 
-**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance. You can toast a Complete Alert, Error, Loading and more!**
+**Currently, in Swift the only way to alert the user is using `Alert`. Sometimes you just want to pop a message that tells the user that something completed, or his message was sent. Apple doesn't provide any other method rather than using `Alert` even though Apple using all kinds of different pop-ups. The results are poor UX where the user would tap "OK/Dismiss" for every little information that he should be notified about.**
+
+**Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: `Message Sent`, `Poor Network Connection`, `Profile Updated`, `Logged In/Out`, `Favorited`, `Loading` and so on... **
+
+**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance.**
 
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
 
@@ -25,8 +28,8 @@
 * Localization support.
 * Font & Background customization.
 
-I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
-You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
+I recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
+You can find these alerts in the AppStore after feedback, after you add a song to your library in Apple Music, or when you connect Airpods to iPhone.
 
 If you like the project, don't forget to `put star ★`.
 
