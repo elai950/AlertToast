@@ -12,9 +12,9 @@
 
 ## 🔭 Overview
 
-**Currently, in Swift the only way to alert the user is using `Alert`. Sometimes you just want to pop a message that tells the user that something completed, or his message was sent. Apple doesn't provide any other method rather than using `Alert` even though Apple using all kinds of different pop-ups. The results are poor UX where the user would tap "OK/Dismiss" for every little information that he should be notified about.**
+Currently, in Swift the only way to alert the user is using `Alert`. Sometimes you just want to pop a message that tells the user that something completed, or his message was sent. Apple doesn't provide any other method rather than using `Alert` even though Apple using all kinds of different pop-ups. The results are poor UX where the user would tap "OK/Dismiss" for every little information that he should be notified about.
 
-**Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: `Message Sent`, `Poor Network Connection`, `Profile Updated`, `Logged In/Out`, `Favorited`, `Loading` and so on... **
+Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: `Message Sent`, `Poor Network Connection`, `Profile Updated`, `Logged In/Out`, `Favorited`, `Loading` and so on...
 
 **Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance.**
 
