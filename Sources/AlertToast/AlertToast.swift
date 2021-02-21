@@ -101,7 +101,7 @@ public struct AlertToast: View{
         case systemImage(String, Color)
         
         ///Image from Assets
-        case image(String)
+        case image(String, Color)
         
         ///Loading indicator (Circular)
         case loading
@@ -138,6 +138,7 @@ public struct AlertToast: View{
     ///When `nil` background is `VisualEffectBlur`
     public var backgroundColor: Color?
     
+    ///Full init with all parameters
     public init(displayMode: DisplayMode = .alert,
                 type: AlertType,
                 title: String? = nil,
@@ -155,40 +156,41 @@ public struct AlertToast: View{
         self.subTitleFont = subTitleFont
         self.boldTitle = boldTitle
         self.backgroundColor = backgroundColor
+    }
+    
+    ///Short init with most used parameters
+    public init(displayMode: DisplayMode,
+                type: AlertType,
+                title: String? = nil,
+                subTitle: String? = nil){
         
+        self.displayMode = displayMode
+        self.type = type
+        self.title = title
+        self.subTitle = subTitle
     }
     
     ///HUD View
     public var hud: some View{
-        VStack{
+        Group{
             HStack(spacing: 16){
                 switch type{
                 case .complete(let color):
                     Image(systemName: "checkmark")
-                        .renderingMode(.template)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 20, maxHeight: 20, alignment: .center)
+                        .hudModifier()
                         .foregroundColor(color)
                 case .error(let color):
                     Image(systemName: "xmark")
-                        .renderingMode(.template)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 20, maxHeight: 20, alignment: .center)
+                        .hudModifier()
                         .foregroundColor(color)
                 case .systemImage(let name, let color):
                     Image(systemName: name)
-                        .renderingMode(.template)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 20, maxHeight: 20, alignment: .center)
+                        .hudModifier()
                         .foregroundColor(color)
-                case .image(let name):
+                case .image(let name, let color):
                     Image(name)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 20, maxHeight: 20, alignment: .center)
+                        .hudModifier()
+                        .foregroundColor(color)
                 case .loading:
                     ActivityIndicator()
                 case .regular:
@@ -214,14 +216,12 @@ public struct AlertToast: View{
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 8)
-            .frame(maxHeight: 150)
+            .frame(minHeight: 55)
             .alertBackground(backgroundColor)
             .clipShape(Capsule())
             .overlay(Capsule().stroke(Color.gray.opacity(0.2), lineWidth: 1))
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 6)
             .compositingGroup()
-            
-            Spacer()
         }
         .padding(.top)
     }
@@ -248,12 +248,13 @@ public struct AlertToast: View{
                     .foregroundColor(color)
                     .padding(.bottom)
                 Spacer()
-            case .image(let name):
+            case .image(let name, let color):
                 Spacer()
                 Image(name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .scaledToFit()
+                    .foregroundColor(color)
                     .padding(.bottom)
                 Spacer()
             case .loading:
@@ -325,7 +326,7 @@ public struct AlertToastModifier: ViewModifier{
     
     private var offset: CGFloat{
         #if os(iOS)
-        return -hostRect.midY + alertRect.height - (screen.height * 0.01)
+        return -hostRect.midY + alertRect.height
         #else
         return (-hostRect.midY + screen.midY) + alertRect.height
         #endif
@@ -467,6 +468,18 @@ fileprivate struct BackgroundModifier: ViewModifier{
             content
                 .background(BlurView())
         }
+    }
+}
+
+@available(iOS 13, macOS 11, *)
+fileprivate extension Image{
+    
+    func hudModifier() -> some View{
+        self
+            .renderingMode(.template)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: 20, maxHeight: 20, alignment: .center)
     }
 }
 
