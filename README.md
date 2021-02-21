@@ -16,9 +16,9 @@ Currently, in Swift the only way to alert the user is by using `Alert`. Sometime
 
 Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: `Message Sent`, `Poor Network Connection`, `Profile Updated`, `Logged In/Out`, `Favorited`, `Loading` and so on...
 
-**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance.**
-
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
+
+**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance.**
 
 * Built with pure SwiftUI.
 * 2 Display modes: `Alert` (pop at the center), `HUD` (drop from the top).
@@ -27,9 +27,6 @@ Alert Toast is an open-source library in Github to use with SwiftUI. It allows y
 * Works with **any** kind of view builder.
 * Localization support.
 * Font & Background customization.
-
-I recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
-You can find these alerts in the AppStore after feedback, after you add a song to your library in Apple Music, or when you connect Airpods to iPhone.
 
 #### If you like the project, don't forget to `put star 🌟`.
 
