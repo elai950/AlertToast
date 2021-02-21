@@ -18,8 +18,6 @@ Alert Toast is an open-source library in Github to use with SwiftUI. It allows y
 
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
 
-**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance.**
-
 * Built with pure SwiftUI.
 * 2 Display modes: `Alert` (pop at the center), `HUD` (drop from the top).
 * `Complete`, `Error` `SystemImage`, `Image`, `Loading`, and `Regular` (Only Text).
