@@ -140,6 +140,17 @@ struct ContentView: View{
 
 ### Alert Toast Parameters
 
+```swift
+AlertToast(displayMode: DisplayMode,
+           type: AlertType,
+           title: Optional(String),
+           subTitle: Optional(String),
+           titleFont: Optional(Font),
+           subTitleFont: Optional(Font),
+           boldTitle: Optional(Bool),
+           backgroundColor: Optional(Color))
+```
+
 #### Available Alert Types:
 - **Regular:** text only (Title and Subtitle).
 - **Complete:** animated checkmark.
@@ -151,18 +162,6 @@ struct ContentView: View{
 #### Alert dialog view modifier (with default settings):
 ```swift
 .presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
-```
-
-#### AlertToast Parameters:
-```swift
-AlertToast(displayMode: DisplayMode,
-           type: AlertType,
-           title: Optional(String),
-           subTitle: Optional(String),
-           titleFont: Optional(Font),
-           subTitleFont: Optional(Font),
-           boldTitle: Optional(Bool),
-           backgroundColor: Optional(Color))
 ```
 
 #### Simple Text Alert:
