@@ -21,9 +21,9 @@
 * 2 Display modes: `Alert` (pop at the center), `HUD` (drop from the top).
 * `Complete`, `Error` `SystemImage`, `Image`, `Loading`, and `Regular` (Only Text).
 * Supports Light & Dark Mode.
-* Works with any kind of view builder.
+* Works with **any** kind of view builder.
 * Localization support.
-* Supports font customization.
+* Font & Background customization.
 
 I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
 You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
