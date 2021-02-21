@@ -14,20 +14,17 @@ import SwiftUI
 public struct BlurView: NSViewRepresentable {
     public typealias NSViewType = NSVisualEffectView
     
-    let material: NSVisualEffectView.Material
-    var blendingMode: NSVisualEffectView.BlendingMode
-    
     public func makeNSView(context: Context) -> NSVisualEffectView {
         let effectView = NSVisualEffectView()
-        effectView.material = material
-        effectView.blendingMode = blendingMode
+        effectView.material = .hudWindow
+        effectView.blendingMode = .withinWindow
         effectView.state = NSVisualEffectView.State.active
         return effectView
     }
     
     public func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
-        nsView.material = material
-        nsView.blendingMode = blendingMode
+        nsView.material = .hudWindow
+        nsView.blendingMode = .withinWindow
     }
 }
 
@@ -37,18 +34,12 @@ public struct BlurView: NSViewRepresentable {
 public struct BlurView: UIViewRepresentable {
     public typealias UIViewType = UIVisualEffectView
     
-    let style: UIBlurEffect.Style
-    
-    public init(style: UIBlurEffect.Style = .systemMaterial) {
-        self.style = style
-    }
-    
     public func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: UIBlurEffect(style: self.style))
+        return UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
     }
     
     public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        uiView.effect = UIBlurEffect(style: self.style)
+        uiView.effect = UIBlurEffect(style: .systemMaterial)
     }
 }
 

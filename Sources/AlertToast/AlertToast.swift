@@ -3,8 +3,10 @@ import SwiftUI
 @available(iOS 13, macOS 11, *)
 fileprivate struct AnimatedCheckmark: View {
     
+    ///Checkmark color
     var color: Color = .black
     
+    ///Checkmark color
     var size: Int = 50
     
     var height: CGFloat {
@@ -36,8 +38,10 @@ fileprivate struct AnimatedCheckmark: View {
 @available(iOS 13, macOS 11, *)
 fileprivate struct AnimatedXmark: View {
     
+    ///xmark color
     var color: Color = .black
     
+    ///xmark size
     var size: Int = 50
     
     var height: CGFloat {
@@ -74,45 +78,67 @@ fileprivate struct AnimatedXmark: View {
 @available(iOS 13, macOS 11, *)
 public struct AlertToast: View{
     
+    ///Determine how the alert will be display
     public enum DisplayMode: Equatable{
-        case alert, hud
+        
+        ///Present at the center of the screen
+        case alert
+        
+        ///Drop from the top of the screen
+        case hud
     }
     
+    ///Determine what the alert will display
     public enum AlertType: Equatable{
+        
+        ///Animated checkmark
         case complete(Color)
+        
+        ///Animated xmark
         case error(Color)
+        
+        ///System image from `SFSymbols`
         case systemImage(String, Color)
+        
+        ///Image from Assets
         case image(String)
+        
+        ///Loading indicator (Circular)
         case loading
+        
+        ///Only text alert
         case regular
     }
     
-    var displayMode: DisplayMode
-    var type: AlertType
-    var title: String?
-    var subTitle: String?
-    var titleFont: Font?
-    var subTitleFont: Font?
-    var boldTitle: Bool?
+    ///The display mode
+    ///`.alert`
+    ///`.hud`
+    public var displayMode: DisplayMode = .alert
     
-    public init(displayMode: DisplayMode = .alert,
-                type: AlertType,
-                title: String? = nil,
-                subTitle: String? = nil,
-                titleFont: Font? = .body,
-                subTitleFont: Font? = .footnote,
-                boldTitle: Bool? = true){
-        
-        self.displayMode = displayMode
-        self.type = type
-        self.title = title
-        self.subTitle = subTitle
-        self.titleFont = titleFont
-        self.subTitleFont = subTitleFont
-        self.boldTitle = boldTitle
-    }
+    ///What the alert would show
+    ///`complete`, `error`, `systemImage`, `image`, `loading`, `regular`
+    public var type: AlertType
     
-    //HUD Toast
+    ///The title of the alert (`Optional(String)`)
+    public var title: String? = nil
+    
+    ///The subtitle of the alert (`Optional(String)`)
+    public var subTitle: String? = nil
+    
+    ///The font title (`Optional(Font)`)
+    public var titleFont: Font? = .body
+    
+    ///The subtitle font (`Optional(Font)`)
+    public var subTitleFont: Font? = .footnote
+    
+    ///Choose bold title boolean (`Optional(Bool)`)
+    public var boldTitle: Bool? = true
+    
+    ///The background of the alert (`Optional(Color)`)
+    ///When `nil` background is `VisualEffectBlur`
+    public var backgroundColor: Color?
+    
+    ///HUD View
     public var hud: some View{
         VStack{
             HStack(spacing: 16){
@@ -168,10 +194,11 @@ public struct AlertToast: View{
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 8)
-            .alertBackground()
+            .frame(maxHeight: 150)
+            .alertBackground(backgroundColor)
             .clipShape(Capsule())
             .overlay(Capsule().stroke(Color.gray.opacity(0.2), lineWidth: 1))
-            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 6)
+            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 6)
             .compositingGroup()
             
             Spacer()
@@ -179,7 +206,7 @@ public struct AlertToast: View{
         .padding(.top)
     }
     
-    //Alert Toast
+    ///Alert View
     public var alert: some View{
         VStack{
             switch type{
@@ -232,11 +259,11 @@ public struct AlertToast: View{
         }
         .padding()
         .withFrame(type != .regular && type != .loading)
-        .alertBackground()
+        .alertBackground(backgroundColor)
         .cornerRadius(10)
     }
     
-    //Main presentation
+    ///Body init determine by `displayMode`
     public var body: some View{
         switch displayMode{
         case .alert:
@@ -250,10 +277,19 @@ public struct AlertToast: View{
 @available(iOS 13, macOS 11, *)
 public struct AlertToastModifier: ViewModifier{
     
+    ///Presentation `Binding<Bool>`
     @Binding var isPresenting: Bool
+    
+    ///Duration time to display the alert
     @State var duration: Double = 2
+    
+    ///Tap to dismiss alert
     @State var tapToDismiss: Bool = true
+    
+    ///Init `AlertToast` View
     var alert: () -> AlertToast
+    
+    ///Completion block returns `true` after dismiss
     var completion: ((Bool) -> ())? = nil
     
     @State private var hostRect: CGRect = .zero
@@ -376,8 +412,9 @@ public struct AlertToastModifier: ViewModifier{
     }
 }
 
+///Fileprivate View Modifier for dynamic frame when alert type is `.regular` / `.loading`
 @available(iOS 13, macOS 11, *)
-public struct WithFrameModifier: ViewModifier{
+fileprivate struct WithFrameModifier: ViewModifier{
     
     var withFrame: Bool
     
@@ -385,12 +422,30 @@ public struct WithFrameModifier: ViewModifier{
     var maxHeight: CGFloat = 175
     
     @ViewBuilder
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
         if withFrame{
             content
                 .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: .center)
         }else{
             content
+        }
+    }
+}
+
+///Fileprivate View Modifier to change the alert background
+@available(iOS 13, macOS 11, *)
+fileprivate struct BackgroundModifier: ViewModifier{
+    
+    var color: Color?
+    
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if color != nil{
+            content
+                .background(color)
+        }else{
+            content
+                .background(BlurView())
         }
     }
 }
@@ -415,15 +470,12 @@ public extension View{
         modifier(AlertToastModifier(isPresenting: isPresenting, duration: duration, tapToDismiss: tapToDismiss, alert: alert, completion: completion))
     }
     
-    #if os(macOS)
-    fileprivate func alertBackground() -> some View{
-        background(BlurView(material: .hudWindow, blendingMode: .withinWindow))
+    /// Choose the alert background
+    /// - Parameter color: Some Color, if `nil` return `VisualEffectBlur`
+    /// - Returns: some View
+    fileprivate func alertBackground(_ color: Color? = nil) -> some View{
+        modifier(BackgroundModifier(color: color))
     }
-    #else
-    fileprivate func alertBackground() -> some View{
-        background(BlurView(style: .systemUltraThinMaterial))
-    }
-    #endif
 }
 
 @available(iOS 13, macOS 11, *)

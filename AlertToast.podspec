@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AlertToast"
-  spec.version      = "1.1.3"
+  spec.version      = "1.1.4"
   spec.summary      = "A popup alert like Apple Music & AppStore feedback."
 
   # This description is used to generate tags and improve search results.
