@@ -153,9 +153,16 @@ struct ContentView: View{
 .presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
 ```
 
-#### A full AlertToast implementation:
+#### AlertToast Parameters:
 ```swift
-AlertToast(displayMode: DisplayMode, type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
+AlertToast(displayMode: DisplayMode,
+           type: AlertType,
+           title: Optional(String),
+           subTitle: Optional(String),
+           titleFont: Optional(Font),
+           subTitleFont: Optional(Font),
+           boldTitle: Optional(Bool),
+           backgroundColor: Optional(Color))
 ```
 
 #### Simple Text Alert:
