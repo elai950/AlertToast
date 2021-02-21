@@ -196,9 +196,11 @@ I wrote an article that contains more usage exmaples.
 
 [Medium - How to toast an alert in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
 
-## 👨‍💻 Contributing
+## 👨‍💻 Contributors
 
 All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
+
+- [@barnard-b](https://github.com/barnard-b)
 
 ## ✍️ Author
 
