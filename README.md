@@ -93,7 +93,7 @@ Then, use the `.presentAlert` view modifier:
 - `isPresenting`: (MUST) assign a `Binding<Bool>` to show or dismiss alert.
 - `duration`: default is 2, set 0 to disable auto dismiss.
 - `tapToDismiss`: default is `true`, set `false` to disable.
-- `alert`: (MUST) expects to receive `AlertToast`.
+- `alert`: (MUST) expects `AlertToast`.
 
 #### Usage example with regular alert
 
@@ -115,10 +115,10 @@ struct ContentView: View{
         .presentAlert(isPresenting: $showAlert){
 
             // `.alert` is the default displayMode
-            AlertToast(displayMode: .alert, type: .regular, title: "Message Sent!")
+            AlertToast(type: .regular, title: "Message Sent!")
             
             //Choose .hud to toast alert from the top of the screen
-            AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
+            //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
         }
     }
 }
