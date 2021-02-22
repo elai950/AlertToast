@@ -86,7 +86,7 @@ If you prefer not to use any of dependency managers, you can integrate `AlertToa
 
 First, add `import AlertToast` on every `swift` file you would like to use `AlertToast`.
 
-Then, use the `.presentAlert` view modifier:
+Then, use the `.toast` view modifier:
 
 **Parameters:**
 
@@ -112,7 +112,7 @@ struct ContentView: View{
                  showAlert.toggle()
             }
         }
-        .presentAlert(isPresenting: $showAlert){
+        .toast(isPresenting: $showAlert){
 
             // `.alert` is the default displayMode
             AlertToast(type: .regular, title: "Message Sent!")
@@ -127,7 +127,7 @@ struct ContentView: View{
 #### Complete Modifier Example
 
 ```swift
-.presentAlert(isPresenting: $showAlert, duration: 2, tapToDismiss: true, alert: {
+.toast(isPresenting: $showAlert, duration: 2, tapToDismiss: true, alert: {
    
    //AlertToast Goes Here
    
@@ -163,7 +163,7 @@ AlertCustom(backgroundColor: Color?,
 
 #### Alert dialog view modifier (with default settings):
 ```swift
-.presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
+.toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
 ```
 
 #### Simple Text Alert:
