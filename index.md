@@ -11,9 +11,10 @@
 </p>
 
 ## 🔭 Overview
-**Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups like Apple Music & Feedback in AppStore alerts.**
 
-**Alert Toast for SwiftUI is very easy to implement, and flexible for changing the alert toast appearance. You can toast a Complete Alert, Error, Loading and more!**
+Currently, in Swift the only way to inform the user about a process is by using `Alert`. Sometimes, you just want to pop a message that tells the user that something completed, or his message was sent. Apple doesn't provide any other method rather than using `Alert` even though Apple using all kinds of different pop-ups. The results are poor UX where the user would need to tap "OK/Dismiss" for every little information that he should be notified about.
+
+Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: `Message Sent`, `Poor Network Connection`, `Profile Updated`, `Logged In/Out`, `Favorited`, `Loading` and so on...
 
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-blue?style=for-the-badge" />
 
@@ -21,14 +22,11 @@
 * 2 Display modes: `Alert` (pop at the center), `HUD` (drop from the top).
 * `Complete`, `Error` `SystemImage`, `Image`, `Loading`, and `Regular` (Only Text).
 * Supports Light & Dark Mode.
-* Works with any kind of view builder.
+* Works with **any** kind of view builder.
 * Localization support.
-* Supports font customization.
+* Font & Background customization.
 
-I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI.
-You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music.
-
-If you like the project, don't forget to `put star ★`.
+#### If you like the project, don't forget to `put star 🌟`.
 
 <a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>&nbsp;&nbsp;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5JN5PT55NAHKU" target="_blank"><img src="https://img.shields.io/badge/Donate-informational?style=for-the-badge&logo=paypal&logoColor=white" ></a>
 
@@ -70,7 +68,7 @@ The [Swift Package Manager](https://swift.org/package-manager/) is a tool for ma
 To integrate `AlertToast` into your Xcode project using Xcode 12, specify it in `File > Swift Packages > Add Package Dependency...`:
 
 ```ogdl
-https://github.com/elai950/AlertToast.git
+https://github.com/elai950/AlertToast.git, :branch="master"
 ```
 
 ------
@@ -95,7 +93,7 @@ Then, use the `.presentAlert` view modifier:
 - `isPresenting`: (MUST) assign a `Binding<Bool>` to show or dismiss alert.
 - `duration`: default is 2, set 0 to disable auto dismiss.
 - `tapToDismiss`: default is `true`, set `false` to disable.
-- `alert`: (MUST) expects to receive `AlertToast`.
+- `alert`: (MUST) expects `AlertToast`.
 
 #### Usage example with regular alert
 
@@ -117,10 +115,10 @@ struct ContentView: View{
         .presentAlert(isPresenting: $showAlert){
 
             // `.alert` is the default displayMode
-            AlertToast(displayMode: .alert, type: .regular, title: "Message Sent!")
+            AlertToast(type: .regular, title: "Message Sent!")
             
             //Choose .hud to toast alert from the top of the screen
-            AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
+            //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
         }
     }
 }
@@ -140,6 +138,21 @@ struct ContentView: View{
 
 ### Alert Toast Parameters
 
+```swift
+AlertToast(displayMode: DisplayMode,
+           type: AlertType,
+           title: Optional(String),
+           subTitle: Optional(String),
+           custom: Optional(AlertCustom))
+           
+//This is the available customizations parameters:
+AlertCustom(backgroundColor: Color?,
+            titleColor: Color?,
+            subTitleColor: Color?,
+            titleFont: Font?,
+            subTitleFont: Font?)
+```
+
 #### Available Alert Types:
 - **Regular:** text only (Title and Subtitle).
 - **Complete:** animated checkmark.
@@ -151,11 +164,6 @@ struct ContentView: View{
 #### Alert dialog view modifier (with default settings):
 ```swift
 .presentAlert(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
-```
-
-#### A full AlertToast implementation:
-```swift
-AlertToast(displayMode: DisplayMode, type: AlertType, title: Optional(String), subTitle: Optional(String), titleFont: Optional(Font), subTitleFont: Optional(Font), boldTitle: Optional(Bool))
 ```
 
 #### Simple Text Alert:
@@ -192,9 +200,11 @@ I wrote an article that contains more usage exmaples.
 
 [Medium - How to toast an alert in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
 
-## 👨‍💻 Contributing
+## 👨‍💻 Contributors
 
 All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
+
+- [@barnard-b](https://github.com/barnard-b)
 
 ## ✍️ Author
 
