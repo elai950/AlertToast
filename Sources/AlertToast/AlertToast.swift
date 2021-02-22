@@ -78,7 +78,7 @@ fileprivate struct AnimatedXmark: View {
 @available(iOS 13, macOS 11, *)
 public struct AlertToast: View{
     
-    ///Determine how the alert will be display
+    /// Determine how the alert will be display
     public enum DisplayMode: Equatable{
         
         ///Present at the center of the screen
@@ -88,26 +88,76 @@ public struct AlertToast: View{
         case hud
     }
     
-    ///Determine what the alert will display
+    /// Determine what the alert will display
     public enum AlertType: Equatable{
         
         ///Animated checkmark
-        case complete(Color)
+        case complete(_ color: Color)
         
         ///Animated xmark
-        case error(Color)
+        case error(_ color: Color)
         
         ///System image from `SFSymbols`
-        case systemImage(String, Color)
+        case systemImage(_ name: String, _ color: Color)
         
         ///Image from Assets
-        case image(String, Color)
+        case image(_ name: String, _ color: Color)
         
         ///Loading indicator (Circular)
         case loading
         
         ///Only text alert
         case regular
+    }
+    
+    /// Customize Alert Appearance
+    public enum AlertCustom: Equatable{
+        
+        case custom(backgroundColor: Color? = nil,
+                    titleColor: Color? = nil,
+                    subTitleColor: Color? = nil,
+                    titleFont: Font? = nil,
+                    subTitleFont: Font? = nil)
+        
+        ///Get background color
+        var backgroundColor: Color? {
+            switch self{
+            case .custom(backgroundColor: let color, _, _, _, _):
+                return color
+            }
+        }
+        
+        /// Get title color
+        var titleColor: Color? {
+            switch self{
+            case .custom(_,let color, _,_,_):
+            return color
+            }
+        }
+        
+        /// Get subTitle color
+        var subtitleColor: Color? {
+            switch self{
+            case .custom(_,_, let color, _,_):
+                return color
+            }
+        }
+        
+        /// Get title font
+        var titleFont: Font? {
+            switch self {
+            case .custom(_, _, _, titleFont: let font, _):
+                return font
+            }
+        }
+        
+        /// Get subTitle font
+        var subTitleFont: Font? {
+            switch self {
+            case .custom(_, _, _, _, subTitleFont: let font):
+                return font
+            }
+        }
     }
     
     ///The display mode
@@ -125,49 +175,31 @@ public struct AlertToast: View{
     ///The subtitle of the alert (`Optional(String)`)
     public var subTitle: String? = nil
     
-    ///The font title (`Optional(Font)`)
-    public var titleFont: Font? = .body
+    ///Customize your alert appearance
+    public var custom: AlertCustom?
     
-    ///The subtitle font (`Optional(Font)`)
-    public var subTitleFont: Font? = .footnote
-    
-    ///Choose bold title boolean (`Optional(Bool)`)
-    public var boldTitle: Bool? = true
-    
-    ///The background of the alert (`Optional(Color)`)
-    ///When `nil` background is `VisualEffectBlur`
-    public var backgroundColor: Color?
-    
-    ///Full init with all parameters
+    ///Full init
     public init(displayMode: DisplayMode = .alert,
                 type: AlertType,
                 title: String? = nil,
                 subTitle: String? = nil,
-                titleFont: Font? = .body,
-                subTitleFont: Font? = .footnote,
-                boldTitle: Bool? = true,
-                backgroundColor: Color? = nil){
+                custom: AlertCustom? = nil){
         
         self.displayMode = displayMode
         self.type = type
         self.title = title
         self.subTitle = subTitle
-        self.titleFont = titleFont
-        self.subTitleFont = subTitleFont
-        self.boldTitle = boldTitle
-        self.backgroundColor = backgroundColor
+        self.custom = custom
     }
     
     ///Short init with most used parameters
     public init(displayMode: DisplayMode,
                 type: AlertType,
-                title: String? = nil,
-                subTitle: String? = nil){
+                title: String? = nil){
         
         self.displayMode = displayMode
         self.type = type
         self.title = title
-        self.subTitle = subTitle
     }
     
     ///HUD View
@@ -201,15 +233,16 @@ public struct AlertToast: View{
                     VStack(alignment: type == .regular ? .center : .leading, spacing: 2){
                         if title != nil{
                             Text(LocalizedStringKey(title ?? ""))
-                                .font(titleFont)
-                                .isBold(boldTitle)
+                                .font(custom?.titleFont ?? Font.body.bold())
                                 .multilineTextAlignment(.center)
+                                .textColor(custom?.titleColor ?? nil)
                         }
                         if subTitle != nil{
                             Text(LocalizedStringKey(subTitle ?? ""))
-                                .font(subTitleFont)
+                                .font(custom?.subTitleFont ?? Font.footnote)
                                 .opacity(0.7)
                                 .multilineTextAlignment(.center)
+                                .textColor(custom?.subtitleColor ?? nil)
                         }
                     }
                 }
@@ -217,7 +250,7 @@ public struct AlertToast: View{
             .padding(.horizontal, 24)
             .padding(.vertical, 8)
             .frame(minHeight: 55)
-            .alertBackground(backgroundColor)
+            .alertBackground(custom?.backgroundColor ?? nil)
             .clipShape(Capsule())
             .overlay(Capsule().stroke(Color.gray.opacity(0.2), lineWidth: 1))
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 6)
@@ -266,21 +299,22 @@ public struct AlertToast: View{
             VStack(spacing: type == .regular ? 8 : 2){
                 if title != nil{
                     Text(LocalizedStringKey(title ?? ""))
-                        .font(titleFont)
-                        .isBold(boldTitle)
+                        .font(custom?.titleFont ?? Font.body.bold())
                         .multilineTextAlignment(.center)
+                        .textColor(custom?.titleColor ?? nil)
                 }
                 if subTitle != nil{
                     Text(LocalizedStringKey(subTitle ?? ""))
-                        .font(subTitleFont)
+                        .font(custom?.subTitleFont ?? Font.footnote)
                         .opacity(0.7)
                         .multilineTextAlignment(.center)
+                        .textColor(custom?.subtitleColor ?? nil)
                 }
             }
         }
         .padding()
         .withFrame(type != .regular && type != .loading)
-        .alertBackground(backgroundColor)
+        .alertBackground(custom?.backgroundColor ?? nil)
         .cornerRadius(10)
     }
     
@@ -471,6 +505,23 @@ fileprivate struct BackgroundModifier: ViewModifier{
     }
 }
 
+///Fileprivate View Modifier to change the text colors
+@available(iOS 13, macOS 11, *)
+fileprivate struct TextForegroundModifier: ViewModifier{
+    
+    var color: Color?
+    
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if color != nil{
+            content
+                .foregroundColor(color)
+        }else{
+            content
+        }
+    }
+}
+
 @available(iOS 13, macOS 11, *)
 fileprivate extension Image{
     
@@ -509,15 +560,11 @@ public extension View{
     fileprivate func alertBackground(_ color: Color? = nil) -> some View{
         modifier(BackgroundModifier(color: color))
     }
-}
-
-@available(iOS 13, macOS 11, *)
-fileprivate extension Text{
-    func isBold(_ isBold: Bool? = true) -> Text{
-        if isBold ?? true{
-            return self.bold()
-        }else{
-            return self
-        }
+    
+    /// Choose the alert background
+    /// - Parameter color: Some Color, if `nil` return `.black`/`.white` depends on system theme
+    /// - Returns: some View
+    fileprivate func textColor(_ color: Color? = nil) -> some View{
+        modifier(TextForegroundModifier(color: color))
     }
 }

@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AlertToast"
-  spec.version      = "1.1.6"
-  spec.summary      = "A popup alert like Apple Music & AppStore feedback."
+  spec.version      = "1.1.7"
+  spec.summary      = "Create Apple-like alerts in SwiftUI"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  spec.description  = "I tried to recreate Apple's alerts appearance and behavior as much as possible to be suitable for SwiftUI. You can find these alerts in the AppStore after feedback and after you add a song to your library in Apple Music."
+  spec.description  = "Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: Message Sent, Poor Network Connection, Profile Updated, Logged In/Out, Favorited, Loading and so on..."
 
   spec.homepage     = "https://github.com/elai950/AlertToast"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
