@@ -192,7 +192,7 @@ AlertToast(type: .image(String), title: Optional(String), subTitle: Optional(Str
 AlertToast(type: .loading, title: Optional(String), subTitle: Optional(String))
 ```
 
-You can add many `.presentAlert` on a single view.
+You can add many `.toast` on a single view.
 
 ## 📖 Article
 
