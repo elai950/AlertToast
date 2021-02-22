@@ -1,13 +1,13 @@
 # Alert Toast SwiftUI [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20over%20170%20free%20design%20blocks%20based%20on%20Bootstrap%204&url=https://froala.com/design-blocks&via=froala&hashtags=bootstrap,design,templates,blocks,developers)
 
 <p align="center">
-   <img src="Assets/GithubCoverNew.png" width="480"/>
+   <img src="https://elai950.github.io/AlertToast/Assets/GithubCoverNew.png" width="480"/>
 </p>
 
 ## 🌄 Example
 
 <p align="center">
-    <img src="Assets/onboarding.png"/>
+    <img src="https://elai950.github.io/AlertToast/Assets/onboarding.png"/>
 </p>
 
 ## 🔭 Overview
