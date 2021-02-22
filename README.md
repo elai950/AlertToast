@@ -103,16 +103,16 @@ import SwiftUI
 
 struct ContentView: View{
 
-    @State private var showAlert = false
+    @State private var showToast = false
 
     var body: some View{
         VStack{
 
-            Button("Show Alert"){
+            Button("Show Toast"){
                  showAlert.toggle()
             }
         }
-        .toast(isPresenting: $showAlert){
+        .toast(isPresenting: $showToast){
 
             // `.alert` is the default displayMode
             AlertToast(type: .regular, title: "Message Sent!")
