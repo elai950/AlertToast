@@ -7,7 +7,7 @@
 ## 🌄 Example
 
 <p align="center">
-    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/onboarding.png"/>
+    <img src="https://github.com/elai950/AlertToast/blob/master/Assets/onboarding.png" style="display: block; margin: auto;"/>
 </p>
 
 ## 🔭 Overview
