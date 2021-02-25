@@ -1,6 +1,6 @@
 ---
 name: Issue
-about: Having an issue
+about: Ask for help about an issue
 title: 'Issue: Auto-dismiss not working'
 labels: good first issue
 assignees: ''
