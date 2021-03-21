@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 @available(iOS 13, macOS 11, *)
 fileprivate struct AnimatedCheckmark: View {
@@ -131,7 +132,7 @@ public struct AlertToast: View{
         var titleColor: Color? {
             switch self{
             case .custom(_,let color, _,_,_):
-            return color
+                return color
             }
         }
         
@@ -249,7 +250,7 @@ public struct AlertToast: View{
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 8)
-            .frame(minHeight: 55)
+            .frame(minHeight: 50)
             .alertBackground(custom?.backgroundColor ?? nil)
             .clipShape(Capsule())
             .overlay(Capsule().stroke(Color.gray.opacity(0.2), lineWidth: 1))
@@ -367,6 +368,56 @@ public struct AlertToastModifier: ViewModifier{
     }
     
     @ViewBuilder
+    public func main() -> some View{
+        if isPresenting{
+            
+            switch alert().displayMode{
+            case .alert:
+                alert()
+                    .onTapGesture {
+                        if tapToDismiss{
+                            withAnimation(Animation.spring()){
+                                isPresenting = false
+                            }
+                        }
+                    }
+                    .onDisappear(perform: {
+                        completion?(true)
+                    })
+                    .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
+            case .hud:
+                alert()
+                    .overlay(
+                        GeometryReader{ geo -> AnyView in
+                            let rect = geo.frame(in: .global)
+                            
+                            if rect.integral != alertRect.integral{
+                                
+                                DispatchQueue.main.async {
+                                    
+                                    self.alertRect = rect
+                                }
+                            }
+                            return AnyView(EmptyView())
+                        }
+                    )
+                    
+                    .onTapGesture {
+                        if tapToDismiss{
+                            withAnimation(Animation.spring()){
+                                isPresenting = false
+                            }
+                        }
+                    }
+                    .onDisappear(perform: {
+                        completion?(true)
+                    })
+                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+            }
+        }
+    }
+    
+    @ViewBuilder
     public func body(content: Content) -> some View {
         content
             .overlay(
@@ -382,88 +433,35 @@ public struct AlertToastModifier: ViewModifier{
                     return AnyView(EmptyView())
                 }
                 .overlay(ZStack{
-                    if isPresenting{
+                    main()
                         
-                        switch alert().displayMode{
-                        case .alert:
-                            alert()
-                                .onAppear {
-                                    
-                                    if alert().type == .loading{
-                                        duration = 0
-                                        tapToDismiss = false
-                                    }
-                                    
-                                    if duration > 0{
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                                            withAnimation(.spring()){
-                                                isPresenting = false
-                                            }
-                                        }
-                                    }
-                                }
-                                .onTapGesture {
-                                    if tapToDismiss{
-                                        withAnimation(.spring()){
-                                            isPresenting = false
-                                        }
-                                    }
-                                }
-                                .onDisappear(perform: {
-                                    completion?(true)
-                                })
-                                .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
-                        case .hud:
-                            alert()
-                                .overlay(
-                                    GeometryReader{ geo -> AnyView in
-                                        let rect = geo.frame(in: .global)
-                                        
-                                        if rect.integral != alertRect.integral{
-                                            
-                                            DispatchQueue.main.async {
-                                            
-                                            self.alertRect = rect
-                                            }
-                                        }
-                                        return AnyView(EmptyView())
-                                    }
-                                )
-                                .onAppear {
-                                    
-                                    if alert().type == .loading{
-                                        duration = 0
-                                        tapToDismiss = false
-                                    }
-                                    
-                                    if duration > 0{
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                                            withAnimation(.spring()){
-                                                isPresenting = false
-                                            }
-                                        }
-                                    }
-                                }
-                                .onTapGesture {
-                                    if tapToDismiss{
-                                        withAnimation(.spring()){
-                                            isPresenting = false
-                                        }
-                                    }
-                                }
-                                .onDisappear(perform: {
-                                    completion?(true)
-                                })
-                                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                        }
-                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: alert().displayMode == .alert ? .infinity : -hostRect.midY / 2, alignment: .center)
                 .offset(x: 0, y: alert().displayMode == .alert ? 0 : offset)
                 .edgesIgnoringSafeArea(alert().displayMode == .alert ? .all : .bottom)
-                .animation(.spring()))
+                .animation(Animation.spring()))
             )
+            .valueChanged(value: isPresenting, onChange: { (presented) in
+                if presented{
+                    onAppearAction()
+                }
+            })
         
+    }
+    
+    func onAppearAction(){
+        if alert().type == .loading{
+            duration = 0
+            tapToDismiss = false
+        }
+        
+        if duration > 0{
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                withAnimation(Animation.spring()){
+                    isPresenting = false
+                }
+            }
+        }
     }
 }
 
@@ -534,7 +532,7 @@ fileprivate extension Image{
     }
 }
 
-@available(iOS 13, macOS 11, *)
+//@available(iOS 13, macOS 11, *)
 public extension View{
     
     /// Return some view w/o frame depends on the condition.
@@ -566,5 +564,15 @@ public extension View{
     /// - Returns: some View
     fileprivate func textColor(_ color: Color? = nil) -> some View{
         modifier(TextForegroundModifier(color: color))
+    }
+    
+    @ViewBuilder func valueChanged<T: Equatable>(value: T, onChange: @escaping (T) -> Void) -> some View {
+        if #available(iOS 14.0, *) {
+            self.onChange(of: value, perform: onChange)
+        } else {
+            self.onReceive(Just(value)) { (value) in
+                onChange(value)
+            }
+        }
     }
 }
