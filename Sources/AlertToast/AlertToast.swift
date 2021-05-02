@@ -76,8 +76,14 @@ fileprivate struct AnimatedXmark: View {
     }
 }
 
+//MARK: - Main View
+
 @available(iOS 13, macOS 11, *)
 public struct AlertToast: View{
+    
+    public enum BannerAnimation{
+        case slide, pop
+    }
     
     /// Determine how the alert will be display
     public enum DisplayMode: Equatable{
@@ -87,6 +93,9 @@ public struct AlertToast: View{
         
         ///Drop from the top of the screen
         case hud
+        
+        ///Banner from the bottom of the view
+        case banner(_ transition: BannerAnimation)
     }
     
     /// Determine what the alert will display
@@ -201,6 +210,53 @@ public struct AlertToast: View{
         self.displayMode = displayMode
         self.type = type
         self.title = title
+    }
+    
+    ///Banner from the bottom of the view
+    public var banner: some View{
+        VStack{
+            Spacer()
+            
+            //Banner view starts here
+            VStack(alignment: .leading){
+                HStack{
+                    switch type{
+                    case .complete(let color):
+                        Image(systemName: "checkmark")
+                            .foregroundColor(color)
+                    case .error(let color):
+                        Image(systemName: "xmark")
+                            .foregroundColor(color)
+                    case .systemImage(let name, let color):
+                        Image(systemName: name)
+                            .foregroundColor(color)
+                    case .image(let name, let color):
+                        Image(name)
+                            .foregroundColor(color)
+                    case .loading:
+                        ActivityIndicator()
+                    case .regular:
+                        EmptyView()
+                    }
+                    
+                    Text(LocalizedStringKey(title ?? ""))
+                        .font(custom?.titleFont ?? Font.headline.bold())
+                }
+                
+                if subTitle != nil{
+                    Spacer()
+                    Text(LocalizedStringKey(subTitle!))
+                        .font(custom?.titleFont ?? Font.subheadline)
+                }
+            }
+            .multilineTextAlignment(.leading)
+            .textColor(custom?.titleColor ?? nil)
+            .padding()
+            .frame(maxWidth: 400, maxHeight: 75, alignment: .leading)
+            .alertBackground(custom?.backgroundColor ?? nil)
+            .cornerRadius(10)
+            .padding([.horizontal, .bottom])
+        }
     }
     
     ///HUD View
@@ -326,6 +382,8 @@ public struct AlertToast: View{
             alert
         case .hud:
             hud
+        case .banner:
+            banner
         }
     }
 }
@@ -413,39 +471,67 @@ public struct AlertToastModifier: ViewModifier{
                         completion?(true)
                     })
                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+            case .banner:
+                alert()
+                    .onTapGesture {
+                        if tapToDismiss{
+                            withAnimation(Animation.spring()){
+                                isPresenting = false
+                            }
+                        }
+                    }
+                    .onDisappear(perform: {
+                        completion?(true)
+                    })
+                    .transition(alert().displayMode == .banner(.slide) ? AnyTransition.slide.combined(with: .opacity) : AnyTransition.move(edge: .bottom))
             }
+            
         }
     }
     
     @ViewBuilder
     public func body(content: Content) -> some View {
-        content
-            .overlay(
-                GeometryReader{ geo -> AnyView in
-                    let rect = geo.frame(in: .global)
-                    
-                    if rect.integral != hostRect.integral{
-                        DispatchQueue.main.async {
-                            self.hostRect = rect
-                        }
-                    }
-                    
-                    return AnyView(EmptyView())
-                }
+        switch alert().displayMode{
+        case .banner:
+            content
                 .overlay(ZStack{
                     main()
+                }
+                .animation(Animation.spring())
+                )
+                .valueChanged(value: isPresenting, onChange: { (presented) in
+                    if presented{
+                        onAppearAction()
+                    }
+                })
+        default:
+            content
+                .overlay(
+                    GeometryReader{ geo -> AnyView in
+                        let rect = geo.frame(in: .global)
                         
-                }
-                .frame(maxWidth: .infinity, maxHeight: alert().displayMode == .alert ? .infinity : -hostRect.midY / 2, alignment: .center)
-                .offset(x: 0, y: alert().displayMode == .alert ? 0 : offset)
-                .edgesIgnoringSafeArea(alert().displayMode == .alert ? .all : .bottom)
-                .animation(Animation.spring()))
-            )
-            .valueChanged(value: isPresenting, onChange: { (presented) in
-                if presented{
-                    onAppearAction()
-                }
-            })
+                        if rect.integral != hostRect.integral{
+                            DispatchQueue.main.async {
+                                self.hostRect = rect
+                            }
+                        }
+                        
+                        return AnyView(EmptyView())
+                    }
+                    .overlay(ZStack{
+                        main()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: alert().displayMode == .alert ? .infinity : -hostRect.midY / 2, alignment: .center)
+                    .offset(x: 0, y: alert().displayMode == .alert ? 0 : offset)
+                    .edgesIgnoringSafeArea(alert().displayMode == .alert ? .all : .bottom)
+                    .animation(Animation.spring()))
+                )
+                .valueChanged(value: isPresenting, onChange: { (presented) in
+                    if presented{
+                        onAppearAction()
+                    }
+                })
+        }
         
     }
     
