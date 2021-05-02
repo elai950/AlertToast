@@ -24,7 +24,7 @@ Alert Toast is an open-source library in Github to use with SwiftUI. It allows y
 <img src="https://img.shields.io/badge/BUILD-PASSING-green?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PLATFORM-IOS%20|%20MACOS-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/LICENSE-MIT-lightgray?style=for-the-badge" />&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/MADE WITH-SWIFTUI-orange?style=for-the-badge" />
 
 * Built with pure SwiftUI.
-* 2 Display modes: `Alert` (pop at the center), `HUD` (drop from the top).
+* 3 Display modes: `Alert` (pop at the center), `HUD` (drop from the top) and `Banner` (pop/slide from the bottom).
 * `Complete`, `Error` `SystemImage`, `Image`, `Loading`, and `Regular` (Only Text).
 * Supports Light & Dark Mode.
 * Works with **any** kind of view builder.
@@ -122,6 +122,9 @@ struct ContentView: View{
             
             //Choose .hud to toast alert from the top of the screen
             //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
+            
+            //Choose .banner to slide/pop alert from the bottom of the screen
+            //AlertToast(displayMode: .banner(.slide), type: .regular, title: "Message Sent!")
         }
     }
 }
