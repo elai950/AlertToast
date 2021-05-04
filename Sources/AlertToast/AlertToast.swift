@@ -218,7 +218,7 @@ public struct AlertToast: View{
             Spacer()
             
             //Banner view starts here
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 10){
                 HStack{
                     switch type{
                     case .complete(let color):
@@ -244,7 +244,7 @@ public struct AlertToast: View{
                 }
                 
                 if subTitle != nil{
-                    Spacer()
+//                    Spacer()
                     Text(LocalizedStringKey(subTitle!))
                         .font(custom?.titleFont ?? Font.subheadline)
                 }
@@ -252,7 +252,7 @@ public struct AlertToast: View{
             .multilineTextAlignment(.leading)
             .textColor(custom?.titleColor ?? nil)
             .padding()
-            .frame(maxWidth: 400, maxHeight: 75, alignment: .leading)
+            .frame(maxWidth: 400, alignment: .leading)
             .alertBackground(custom?.backgroundColor ?? nil)
             .cornerRadius(10)
             .padding([.horizontal, .bottom])
