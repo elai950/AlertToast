@@ -1,3 +1,13 @@
+//MIT License
+//
+//Copyright (c) 2021 Elai Zuberman
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 import SwiftUI
 import Combine
 
@@ -244,7 +254,6 @@ public struct AlertToast: View{
                 }
                 
                 if subTitle != nil{
-//                    Spacer()
                     Text(LocalizedStringKey(subTitle!))
                         .font(custom?.titleFont ?? Font.subheadline)
                 }
@@ -404,10 +413,13 @@ public struct AlertToastModifier: ViewModifier{
     var alert: () -> AlertToast
     
     ///Completion block returns `true` after dismiss
-    var completion: ((Bool) -> ())? = nil
+    var onTap: (() -> ())? = nil
+    var completion: (() -> ())? = nil
     
     @State private var hostRect: CGRect = .zero
     @State private var alertRect: CGRect = .zero
+    
+    @State private var workItem: DispatchWorkItem?
     
     private var screen: CGRect {
         #if os(iOS)
@@ -433,6 +445,7 @@ public struct AlertToastModifier: ViewModifier{
             case .alert:
                 alert()
                     .onTapGesture {
+                        onTap?()
                         if tapToDismiss{
                             withAnimation(Animation.spring()){
                                 isPresenting = false
@@ -440,7 +453,7 @@ public struct AlertToastModifier: ViewModifier{
                         }
                     }
                     .onDisappear(perform: {
-                        completion?(true)
+                        completion?()
                     })
                     .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
             case .hud:
@@ -461,6 +474,7 @@ public struct AlertToastModifier: ViewModifier{
                     )
                     
                     .onTapGesture {
+                        onTap?()
                         if tapToDismiss{
                             withAnimation(Animation.spring()){
                                 isPresenting = false
@@ -468,12 +482,13 @@ public struct AlertToastModifier: ViewModifier{
                         }
                     }
                     .onDisappear(perform: {
-                        completion?(true)
+                        completion?()
                     })
                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
             case .banner:
                 alert()
                     .onTapGesture {
+                        onTap?()
                         if tapToDismiss{
                             withAnimation(Animation.spring()){
                                 isPresenting = false
@@ -481,7 +496,7 @@ public struct AlertToastModifier: ViewModifier{
                         }
                     }
                     .onDisappear(perform: {
-                        completion?(true)
+                        completion?()
                     })
                     .transition(alert().displayMode == .banner(.slide) ? AnyTransition.slide.combined(with: .opacity) : AnyTransition.move(edge: .bottom))
             }
@@ -497,7 +512,7 @@ public struct AlertToastModifier: ViewModifier{
                 .overlay(ZStack{
                     main()
                 }
-                .animation(Animation.spring())
+                .animation(Animation.spring(), value: isPresenting)
                 )
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
@@ -524,7 +539,7 @@ public struct AlertToastModifier: ViewModifier{
                     .frame(maxWidth: .infinity, maxHeight: alert().displayMode == .alert ? .infinity : -hostRect.midY / 2, alignment: .center)
                     .offset(x: 0, y: alert().displayMode == .alert ? 0 : offset)
                     .edgesIgnoringSafeArea(alert().displayMode == .alert ? .all : .bottom)
-                    .animation(Animation.spring()))
+                    .animation(Animation.spring(), value: isPresenting))
                 )
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
@@ -542,11 +557,15 @@ public struct AlertToastModifier: ViewModifier{
         }
         
         if duration > 0{
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            workItem?.cancel()
+            
+            let task = DispatchWorkItem {
                 withAnimation(Animation.spring()){
                     isPresenting = false
                 }
             }
+            workItem = task
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: task)
         }
     }
 }
@@ -634,8 +653,8 @@ public extension View{
     ///   - show: Binding<Bool>
     ///   - alert: () -> AlertToast
     /// - Returns: `AlertToast`
-    func toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: Bool = true, alert: @escaping () -> AlertToast, completion: ((Bool) -> ())? = nil) -> some View{
-        modifier(AlertToastModifier(isPresenting: isPresenting, duration: duration, tapToDismiss: tapToDismiss, alert: alert, completion: completion))
+    func toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: Bool = true, alert: @escaping () -> AlertToast, onTap: (() -> ())? = nil, completion: (() -> ())? = nil) -> some View{
+        modifier(AlertToastModifier(isPresenting: isPresenting, duration: duration, tapToDismiss: tapToDismiss, alert: alert, onTap: onTap, completion: completion))
     }
     
     /// Choose the alert background
@@ -652,7 +671,7 @@ public extension View{
         modifier(TextForegroundModifier(color: color))
     }
     
-    @ViewBuilder func valueChanged<T: Equatable>(value: T, onChange: @escaping (T) -> Void) -> some View {
+    @ViewBuilder fileprivate func valueChanged<T: Equatable>(value: T, onChange: @escaping (T) -> Void) -> some View {
         if #available(iOS 14.0, *) {
             self.onChange(of: value, perform: onChange)
         } else {
