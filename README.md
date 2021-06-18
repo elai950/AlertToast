@@ -134,9 +134,7 @@ struct ContentView: View{
 
 ```swift
 .toast(isPresenting: $showAlert, duration: 2, tapToDismiss: true, alert: {
-   
-   //AlertToast Goes Here
-   
+   //AlertToast goes here
 }, onTap: {
    //onTap would call either if `tapToDismis` is true/false
    //If tapToDismiss is true, onTap would call and then dismis the alert
