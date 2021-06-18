@@ -137,8 +137,11 @@ struct ContentView: View{
    
    //AlertToast Goes Here
    
-}, completion: { dismissed in
-   //Completion block after dismiss (returns true)
+}, onTap: {
+   //onTap would call either if `tapToDismis` is true/false
+   //If tapToDismiss is true, onTap would call and then dismis the alert
+}, completion: {
+   //Completion block after dismiss
 })
 ```
 
@@ -169,7 +172,7 @@ AlertCustom(backgroundColor: Color?,
 
 #### Alert dialog view modifier (with default settings):
 ```swift
-.toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: { () -> AlertToast }, completion: { (Bool) -> () })
+.toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: true, alert: () -> AlertToast , onTap: () -> (), completion: () -> () )
 ```
 
 #### Simple Text Alert:
