@@ -38,7 +38,7 @@ fileprivate struct AnimatedCheckmark: View {
         }
         .trim(from: 0, to: percentage)
         .stroke(color, style: StrokeStyle(lineWidth: CGFloat(size / 8), lineCap: .round, lineJoin: .round))
-        .animation(Animation.spring().speed(0.75).delay(0.25))
+        .animation(Animation.spring().speed(0.75).delay(0.25), value: percentage)
         .onAppear {
             percentage = 1.0
         }
@@ -78,7 +78,7 @@ fileprivate struct AnimatedXmark: View {
         }
         .trim(from: 0, to: percentage)
         .stroke(color, style: StrokeStyle(lineWidth: CGFloat(size / 8), lineCap: .round, lineJoin: .round))
-        .animation(Animation.spring().speed(0.75).delay(0.25))
+        .animation(Animation.spring().speed(0.75).delay(0.25), value: percentage)
         .onAppear {
             percentage = 1.0
         }
@@ -409,6 +409,8 @@ public struct AlertToastModifier: ViewModifier{
     ///Tap to dismiss alert
     @State var tapToDismiss: Bool = true
     
+    var offsetY: CGFloat = 0
+    
     ///Init `AlertToast` View
     var alert: () -> AlertToast
     
@@ -431,9 +433,9 @@ public struct AlertToastModifier: ViewModifier{
     
     private var offset: CGFloat{
         #if os(iOS)
-        return -hostRect.midY + alertRect.height
+        return (-hostRect.midY + alertRect.height) + offsetY
         #else
-        return (-hostRect.midY + screen.midY) + alertRect.height
+        return (-hostRect.midY + screen.midY) + alertRect.height + offsetY
         #endif
     }
     
@@ -653,8 +655,8 @@ public extension View{
     ///   - show: Binding<Bool>
     ///   - alert: () -> AlertToast
     /// - Returns: `AlertToast`
-    func toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: Bool = true, alert: @escaping () -> AlertToast, onTap: (() -> ())? = nil, completion: (() -> ())? = nil) -> some View{
-        modifier(AlertToastModifier(isPresenting: isPresenting, duration: duration, tapToDismiss: tapToDismiss, alert: alert, onTap: onTap, completion: completion))
+    func toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: Bool = true, offsetY: CGFloat = 0, alert: @escaping () -> AlertToast, onTap: (() -> ())? = nil, completion: (() -> ())? = nil) -> some View{
+        modifier(AlertToastModifier(isPresenting: isPresenting, duration: duration, tapToDismiss: tapToDismiss, offsetY: offsetY, alert: alert, onTap: onTap, completion: completion))
     }
     
     /// Choose the alert background
