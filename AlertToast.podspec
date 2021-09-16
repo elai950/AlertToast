@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AlertToast"
-  spec.version      = "1.3.0"
-  spec.summary      = "Create Apple-like alerts in SwiftUI"
+  spec.version      = "1.3.1"
+  spec.summary      = "Create Apple-like alerts & toasts using SwiftUI"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   spec.description  = "Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: Message Sent, Poor Network Connection, Profile Updated, Logged In/Out, Favorited, Loading and so on..."
 
   spec.homepage     = "https://github.com/elai950/AlertToast"
-  # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  spec.screenshots  = "https://github.com/elai950/AlertToast/blob/master/Assets/ToastExample.gif"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,8 +90,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "Sources/AlertToast/**/*.swift"
-
-  # spec.exclude_files = "Classes/Exclude"
+  spec.exclude_files = "Assets/", "Tests/"
 
   # spec.public_header_files = "Classes/**/*.h"
 
