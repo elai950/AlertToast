@@ -541,7 +541,7 @@ public struct AlertToastModifier: ViewModifier{
         
     }
     
-    private func onAppearAction(){
+    func onAppearAction(){
         if alert().type == .loading{
             duration = 0
             tapToDismiss = false
