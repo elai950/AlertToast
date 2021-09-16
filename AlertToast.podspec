@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   spec.description  = "Alert Toast is an open-source library in Github to use with SwiftUI. It allows you to present popups that don't need any user action to dismiss or to validate. Some great usage examples: Message Sent, Poor Network Connection, Profile Updated, Logged In/Out, Favorited, Loading and so on..."
 
   spec.homepage     = "https://github.com/elai950/AlertToast"
-  spec.screenshots  = "https://github.com/elai950/AlertToast/blob/master/Assets/ToastExample.gif"
+  # spec.screenshots  = "https://github.com/elai950/AlertToast/blob/master/Assets/ToastExample.gif"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
