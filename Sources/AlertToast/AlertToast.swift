@@ -400,11 +400,6 @@ public struct AlertToastModifier: ViewModifier{
     @State private var hostRect: CGRect = .zero
     @State private var alertRect: CGRect = .zero
     
-    private func edgeInsets() -> EdgeInsets{
-        let insets = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero
-        return EdgeInsets(top: insets.top, leading: insets.left, bottom: insets.bottom, trailing: insets.right)
-    }
-    
     private var screen: CGRect {
 #if os(iOS)
         return UIScreen.main.bounds
