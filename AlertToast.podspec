@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AlertToast"
-  spec.version      = "1.3.1"
+  spec.version      = "1.3.2"
   spec.summary      = "Create Apple-like alerts & toasts using SwiftUI"
 
   # This description is used to generate tags and improve search results.

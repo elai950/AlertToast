@@ -134,10 +134,10 @@ public struct AlertToast: View{
     public enum AlertStyle: Equatable{
         
         case style(backgroundColor: Color? = nil,
-                    titleColor: Color? = nil,
-                    subTitleColor: Color? = nil,
-                    titleFont: Font? = nil,
-                    subTitleFont: Font? = nil)
+                   titleColor: Color? = nil,
+                   subTitleColor: Color? = nil,
+                   titleFont: Font? = nil,
+                   subTitleFont: Font? = nil)
         
         ///Get background color
         var backgroundColor: Color? {
@@ -199,15 +199,6 @@ public struct AlertToast: View{
     ///Customize your alert appearance
     public var style: AlertStyle? = nil
     
-    @ViewBuilder
-    var progressView: some View{
-        if #available(iOS 14, *){
-            ProgressView()
-        }else{
-            ActivityIndicator()
-        }
-    }
-    
     ///Banner from the bottom of the view
     public var banner: some View{
         VStack{
@@ -230,7 +221,7 @@ public struct AlertToast: View{
                         Image(name)
                             .foregroundColor(color)
                     case .loading:
-                        progressView
+                        ActivityIndicator()
                     case .regular:
                         EmptyView()
                     }
@@ -276,7 +267,7 @@ public struct AlertToast: View{
                         .hudModifier()
                         .foregroundColor(color)
                 case .loading:
-                    progressView
+                    ActivityIndicator()
                 case .regular:
                     EmptyView()
                 }
@@ -343,7 +334,7 @@ public struct AlertToast: View{
                     .padding(.bottom)
                 Spacer()
             case .loading:
-                progressView
+                ActivityIndicator()
             case .regular:
                 EmptyView()
             }
@@ -406,6 +397,30 @@ public struct AlertToastModifier: ViewModifier{
     
     @State private var workItem: DispatchWorkItem?
     
+    @State private var hostRect: CGRect = .zero
+    @State private var alertRect: CGRect = .zero
+    
+    private func edgeInsets() -> EdgeInsets{
+        let insets = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero
+        return EdgeInsets(top: insets.top, leading: insets.left, bottom: insets.bottom, trailing: insets.right)
+    }
+    
+    private var screen: CGRect {
+#if os(iOS)
+        return UIScreen.main.bounds
+#else
+        return NSScreen.main?.frame ?? .zero
+#endif
+    }
+    
+    private var offset: CGFloat{
+#if os(iOS)
+        return -hostRect.midY + alertRect.height
+#else
+        return (-hostRect.midY + screen.midY) + alertRect.height
+#endif
+    }
+    
     @ViewBuilder
     public func main() -> some View{
         if isPresenting{
@@ -427,6 +442,20 @@ public struct AlertToastModifier: ViewModifier{
                     .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
             case .hud:
                 alert()
+                    .overlay(
+                        GeometryReader{ geo -> AnyView in
+                            let rect = geo.frame(in: .global)
+                            
+                            if rect.integral != alertRect.integral{
+                                
+                                DispatchQueue.main.async {
+                                    
+                                    self.alertRect = rect
+                                }
+                            }
+                            return AnyView(EmptyView())
+                        }
+                    )
                     .onTapGesture {
                         onTap?()
                         if tapToDismiss{
@@ -467,7 +496,33 @@ public struct AlertToastModifier: ViewModifier{
                     main()
                         .offset(y: offsetY)
                 }
-                .animation(Animation.spring(), value: isPresenting)
+                            .animation(Animation.spring(), value: isPresenting)
+                )
+                .valueChanged(value: isPresenting, onChange: { (presented) in
+                    if presented{
+                        onAppearAction()
+                    }
+                })
+        case .hud:
+            content
+                .overlay(
+                    GeometryReader{ geo -> AnyView in
+                        let rect = geo.frame(in: .global)
+                        
+                        if rect.integral != hostRect.integral{
+                            DispatchQueue.main.async {
+                                self.hostRect = rect
+                            }
+                        }
+                        
+                        return AnyView(EmptyView())
+                    }
+                        .overlay(ZStack{
+                            main()
+                        }
+                                    .frame(maxWidth: screen.width, maxHeight: screen.height)
+                                    .offset(y: offset)
+                                    .animation(Animation.spring(), value: isPresenting))
                 )
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
@@ -478,24 +533,10 @@ public struct AlertToastModifier: ViewModifier{
             content
                 .overlay(ZStack{
                     main()
-                        .offset(y: offsetY)
                 }
-                .animation(Animation.spring(), value: isPresenting))
-                .valueChanged(value: isPresenting, onChange: { (presented) in
-                    if presented{
-                        onAppearAction()
-                    }
-                })
-        case .hud:
-            content
-                .overlay(
-                    VStack{
-                        main()
-                            .offset(y: offsetY)
-                        Spacer()
-                    }
-                        .animation(Animation.spring(), value: isPresenting)
-                )
+                            .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
+                            .edgesIgnoringSafeArea(.all)
+                            .animation(Animation.spring(), value: isPresenting))
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
                         onAppearAction()
