@@ -514,6 +514,7 @@ public struct AlertToastModifier: ViewModifier{
                     }
                         .overlay(ZStack{
                             main()
+                                .offset(y: offsetY)
                         }
                                     .frame(maxWidth: screen.width, maxHeight: screen.height)
                                     .offset(y: offset)
@@ -528,6 +529,7 @@ public struct AlertToastModifier: ViewModifier{
             content
                 .overlay(ZStack{
                     main()
+                        .offset(y: offsetY)
                 }
                             .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
                             .edgesIgnoringSafeArea(.all)
@@ -541,7 +543,7 @@ public struct AlertToastModifier: ViewModifier{
         
     }
     
-    func onAppearAction(){
+    public func onAppearAction(){
         if alert().type == .loading{
             duration = 0
             tapToDismiss = false
