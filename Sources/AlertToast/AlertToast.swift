@@ -199,6 +199,30 @@ public struct AlertToast: View{
     ///Customize your alert appearance
     public var style: AlertStyle? = nil
     
+    ///Full init
+    public init(displayMode: DisplayMode = .alert,
+                type: AlertType,
+                title: String? = nil,
+                subTitle: String? = nil,
+                style: AlertStyle? = nil){
+        
+        self.displayMode = displayMode
+        self.type = type
+        self.title = title
+        self.subTitle = subTitle
+        self.style = style
+    }
+    
+    ///Short init with most used parameters
+    public init(displayMode: DisplayMode,
+                type: AlertType,
+                title: String? = nil){
+        
+        self.displayMode = displayMode
+        self.type = type
+        self.title = title
+    }
+    
     ///Banner from the bottom of the view
     public var banner: some View{
         VStack{
@@ -543,7 +567,7 @@ public struct AlertToastModifier: ViewModifier{
         
     }
     
-    public func onAppearAction(){
+    private func onAppearAction(){
         if alert().type == .loading{
             duration = 0
             tapToDismiss = false
