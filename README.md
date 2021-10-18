@@ -150,10 +150,10 @@ AlertToast(displayMode: DisplayMode,
            type: AlertType,
            title: Optional(String),
            subTitle: Optional(String),
-           custom: Optional(AlertCustom))
+           style: Optional(AlertStyle))
            
 //This is the available customizations parameters:
-AlertCustom(backgroundColor: Color?,
+AlertStyle(backgroundColor: Color?,
             titleColor: Color?,
             subTitleColor: Color?,
             titleFont: Font?,
