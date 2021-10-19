@@ -219,7 +219,7 @@ Elai Zuberman
 
 ## 📃 License
 
-`AlertToast` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+`AlertToast` is available under the MIT license. See the [LICENSE](https://github.com/elai950/AlertToast/blob/master/LICENSE.md) file for more info.
 
 ---
 
