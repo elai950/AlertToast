@@ -203,7 +203,7 @@ You can add many `.toast` on a single view.
 
 ## 📖 Article
 
-I wrote an article that contains more usage exmaples.
+I wrote an article that contains more usage examples.
 
 [Medium - How to toast an alert in SwiftUI](https://elaizuberman.medium.com/presenting-apples-music-alerts-in-swiftui-7f5c32cebed6)
 
