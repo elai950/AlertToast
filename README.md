@@ -74,6 +74,8 @@ To integrate `AlertToast` into your Xcode project using Xcode 12, specify it in 
 https://github.com/elai950/AlertToast.git, :branch="master"
 ```
 
+For Xcode 13, please refer [this article](https://iiroalhonen.medium.com/adding-a-swift-package-dependency-in-xcode-13-937b2caaf218) to install `AlertToast` 
+
 ------
 
 ### Manually
