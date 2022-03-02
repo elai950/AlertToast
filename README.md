@@ -114,7 +114,7 @@ struct ContentView: View{
         VStack{
 
             Button("Show Toast"){
-                 showAlert.toggle()
+                 showToast.toggle()
             }
         }
         .toast(isPresenting: $showToast){
