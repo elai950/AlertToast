@@ -179,7 +179,19 @@ public struct AlertToast: View{
             }
         }
     }
+  
+  /// Determine how the alert will be dismiss
+  public enum AlertDismissMode: Equatable{
+      
+      ///Dismiss alert by tapping from anywhere on the screen
+      case fullscreen
     
+      ///Dismiss alert only tapping defined content
+      case onlyContent
+      
+      ///Dismiss alert only by tapping alert
+      case onlyAlert
+  }
     ///The display mode
     /// - `alert`
     /// - `hud`
@@ -198,29 +210,46 @@ public struct AlertToast: View{
     
     ///Customize your alert appearance
     public var style: AlertStyle? = nil
+  
+    ///Dismiss alert mode
+    /// - 'fullscreen'
+    /// - 'onlyContent
+    /// - 'onlyAlert
+    public var alertDismissMode: AlertDismissMode = .onlyAlert
+  
+    ///Background color
+    public var backgroundColor: Color = Color.clear
     
     ///Full init
-    public init(displayMode: DisplayMode = .alert,
-                type: AlertType,
-                title: String? = nil,
-                subTitle: String? = nil,
-                style: AlertStyle? = nil){
-        
+    public init(
+      displayMode: DisplayMode = .alert,
+      type: AlertType,
+      title: String? = nil,
+      subTitle: String? = nil,
+      style: AlertStyle? = nil,
+      alertDismissMode: AlertDismissMode = .onlyAlert,
+      backgroundColor: Color = Color.clear){
         self.displayMode = displayMode
         self.type = type
         self.title = title
         self.subTitle = subTitle
         self.style = style
+        self.alertDismissMode = alertDismissMode
+        self.backgroundColor = backgroundColor
     }
     
     ///Short init with most used parameters
-    public init(displayMode: DisplayMode,
-                type: AlertType,
-                title: String? = nil){
-        
+    public init(
+      displayMode: DisplayMode,
+      type: AlertType,
+      title: String? = nil,
+      alertDismissMode: AlertDismissMode = .onlyAlert,
+      backgroundColor: Color = Color.clear){
         self.displayMode = displayMode
         self.type = type
         self.title = title
+        self.alertDismissMode = alertDismissMode
+        self.backgroundColor = backgroundColor
     }
     
     ///Banner from the bottom of the view
@@ -446,23 +475,35 @@ public struct AlertToastModifier: ViewModifier{
     @ViewBuilder
     public func main() -> some View{
         if isPresenting{
-            
             switch alert().displayMode{
             case .alert:
-                alert()
-                    .onTapGesture {
-                        onTap?()
-                        if tapToDismiss{
-                            withAnimation(Animation.spring()){
-                                self.workItem?.cancel()
-                                isPresenting = false
-                            }
-                        }
-                    }
-                    .onDisappear(perform: {
-                        completion?()
-                    })
-                    .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
+              Group {
+                switch alert().alertDismissMode {
+                case .fullscreen:
+                  ZStack {
+                    alert()
+                  }
+                  .frame(width: screen.width, height: screen.height, alignment: .center)
+                  .background(alert().backgroundColor.contentShape(Rectangle()))
+                case .onlyContent:
+                  alert()
+                    .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
+                    .background(alert().backgroundColor.contentShape(Rectangle()))
+                case .onlyAlert:
+                  alert()
+                    .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
+                }
+              }
+              .onTapGesture {
+                onTap?()
+                if tapToDismiss{
+                  dismissAlert()
+                }
+              }
+              .onDisappear {
+                completion?()
+              }
+              .transition(AnyTransition.scale(scale: 0.8).combined(with: .opacity))
             case .hud:
                 alert()
                     .overlay(
@@ -482,10 +523,7 @@ public struct AlertToastModifier: ViewModifier{
                     .onTapGesture {
                         onTap?()
                         if tapToDismiss{
-                            withAnimation(Animation.spring()){
-                                self.workItem?.cancel()
-                                isPresenting = false
-                            }
+                          dismissAlert()
                         }
                     }
                     .onDisappear(perform: {
@@ -497,10 +535,7 @@ public struct AlertToastModifier: ViewModifier{
                     .onTapGesture {
                         onTap?()
                         if tapToDismiss{
-                            withAnimation(Animation.spring()){
-                                self.workItem?.cancel()
-                                isPresenting = false
-                            }
+                          dismissAlert()
                         }
                     }
                     .onDisappear(perform: {
@@ -556,21 +591,26 @@ public struct AlertToastModifier: ViewModifier{
                     }
                 })
         case .alert:
-            content
-                .overlay(ZStack{
-                    main()
-                        .offset(y: offsetY)
-                }
-                            .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
-                            .edgesIgnoringSafeArea(.all)
-                            .animation(Animation.spring(), value: isPresenting))
-                .valueChanged(value: isPresenting, onChange: { (presented) in
-                    if presented{
-                        onAppearAction()
-                    }
-                })
+          content
+            .overlay(
+              main()
+                .offset(y: offsetY)
+                .edgesIgnoringSafeArea(.all)
+                .animation(Animation.spring(), value: isPresenting)
+            )
+            .onTapGesture {
+              onTap?()
+              if tapToDismiss,
+                  self.alert().alertDismissMode == .onlyContent{
+                dismissAlert()
+              }
+            }
+            .valueChanged(value: isPresenting) { presented in
+              if presented {
+                onAppearAction()
+              }
+            }
         }
-        
     }
     
     private func onAppearAction(){
@@ -591,6 +631,13 @@ public struct AlertToastModifier: ViewModifier{
             DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: task)
         }
     }
+  
+  private func dismissAlert() {
+    withAnimation(Animation.spring()) {
+      self.workItem?.cancel()
+      isPresenting = false
+    }
+  }
 }
 
 ///Fileprivate View Modifier for dynamic frame when alert type is `.regular` / `.loading`
