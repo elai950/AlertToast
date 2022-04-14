@@ -381,7 +381,6 @@ public struct AlertToast: View{
                 }
             }
         }
-        .fixedSize(horizontal: true, vertical: false)
         .padding()
         .withFrame(type != .regular && type != .loading)
         .alertBackground(style?.backgroundColor ?? nil)
