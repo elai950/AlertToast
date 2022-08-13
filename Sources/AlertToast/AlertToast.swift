@@ -435,11 +435,7 @@ public struct AlertToastModifier: ViewModifier{
     }
     
     private var offset: CGFloat{
-#if os(iOS)
         return -hostRect.midY + alertRect.height
-#else
-        return (-hostRect.midY + screen.midY) + alertRect.height
-#endif
     }
     
     @ViewBuilder
