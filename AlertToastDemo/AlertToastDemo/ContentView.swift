@@ -21,7 +21,7 @@ struct ContentView: View {
            }
            
         }
-        .toast(isPresenting: $viewModel.show){
+        .toast(isPresenting: $viewModel.show, duration: 2){
             //Return AlertToast from ObservableObject
             viewModel.alertToast
         }
@@ -42,9 +42,20 @@ struct SecondView: View{
             
             //You can also change the alert type, present
             //a different one and show (because of didSet)
-            Button("Change Alert Type"){
+            Button("Change Alert Type to complete"){
                 viewModel.alertToast = AlertToast(type: .complete(.green), title: "Completed!", subTitle: nil)
             }
+            
+            Button("Change Alert Type to error"){
+                viewModel.alertToast = AlertToast(type: .error(.red), title: "Error occur", subTitle: "Try again later.")
+            }
+            
+            Button("Change Alert Type to loading"){
+                viewModel.alertToast = AlertToast(type: .loading, title: "Loading..", subTitle: nil)
+            }
+            
+            
+            
         }
     }
 }
@@ -60,7 +71,7 @@ struct ContentView_Previews: PreviewProvider {
 class AlertViewModel: ObservableObject{
     
     @Published var show = false
-    @Published var alertToast = AlertToast(type: .regular, title: "SOME TITLE"){
+    @Published var alertToast = AlertToast(type: .regular, title: "this is regular alert!"){
         didSet{
             show.toggle()
         }
