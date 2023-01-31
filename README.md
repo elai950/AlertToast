@@ -35,6 +35,13 @@ Alert Toast is an open-source library in Github to use with SwiftUI. It allows y
 
 <a href="mailto:elai950@gmail.com"><img src="https://img.shields.io/badge/EMAIL-ELAI-informational?style=for-the-badge&logo=minutemailer&logoColor=white"></a>&nbsp;&nbsp;&nbsp;<a href="https://www.linkedin.com/in/elai-zuberman-8120a073/" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-informational?style=for-the-badge&logo=linkedin&logoColor=white" ></a>&nbsp;&nbsp;&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5JN5PT55NAHKU" target="_blank"><img src="https://img.shields.io/badge/Donate-informational?style=for-the-badge&logo=paypal&logoColor=white" ></a>
 
+₿ Bitcoin donation address:
+```
+0xec48bfa813a773fa2394aec23f97da5cb4d5ff02
+```
+- Send only BTC to this deposit address.
+- Ensure the network is BNB Smart Chain (BEP20).
+
 ## Navigation
 
 - [Installation](#-installation)
