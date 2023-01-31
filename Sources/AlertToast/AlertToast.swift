@@ -243,6 +243,7 @@ public struct AlertToast: View{
                             .foregroundColor(color)
                     case .image(let name, let color):
                         Image(name)
+                            .renderingMode(.template)
                             .foregroundColor(color)
                     case .loading:
                         ActivityIndicator()
