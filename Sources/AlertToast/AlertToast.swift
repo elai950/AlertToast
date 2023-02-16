@@ -136,13 +136,14 @@ public struct AlertToast: View{
         case style(backgroundColor: Color? = nil,
                    titleColor: Color? = nil,
                    subTitleColor: Color? = nil,
+                   borderColor: Color? = nil,
                    titleFont: Font? = nil,
                    subTitleFont: Font? = nil)
         
         ///Get background color
         var backgroundColor: Color? {
             switch self{
-            case .style(backgroundColor: let color, _, _, _, _):
+            case .style(backgroundColor: let color, _, _, _, _, _):
                 return color
             }
         }
@@ -150,7 +151,7 @@ public struct AlertToast: View{
         /// Get title color
         var titleColor: Color? {
             switch self{
-            case .style(_,let color, _,_,_):
+            case .style(_,let color, _, _,_,_):
                 return color
             }
         }
@@ -158,7 +159,15 @@ public struct AlertToast: View{
         /// Get subTitle color
         var subtitleColor: Color? {
             switch self{
-            case .style(_,_, let color, _,_):
+            case .style(_,_, let color, _, _,_):
+                return color
+            }
+        }
+        
+        /// Get border color
+        var borderColor: Color? {
+            switch self{
+            case .style(_, _, _, let color, _, _):
                 return color
             }
         }
@@ -166,7 +175,7 @@ public struct AlertToast: View{
         /// Get title font
         var titleFont: Font? {
             switch self {
-            case .style(_, _, _, titleFont: let font, _):
+            case .style(_, _, _, _, titleFont: let font, _):
                 return font
             }
         }
@@ -174,7 +183,7 @@ public struct AlertToast: View{
         /// Get subTitle font
         var subTitleFont: Font? {
             switch self {
-            case .style(_, _, _, _, subTitleFont: let font):
+            case .style(_, _, _, _, _, subTitleFont: let font):
                 return font
             }
         }
@@ -320,7 +329,7 @@ public struct AlertToast: View{
             .frame(minHeight: 50)
             .alertBackground(style?.backgroundColor ?? nil)
             .clipShape(Capsule())
-            .overlay(Capsule().stroke(Color.gray.opacity(0.2), lineWidth: 1))
+            .overlay(Capsule().stroke(style?.borderColor ?? Color.gray.opacity(0.2), lineWidth: 1))
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 6)
             .compositingGroup()
         }
