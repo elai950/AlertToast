@@ -514,11 +514,12 @@ public struct AlertToastModifier: ViewModifier{
         switch alert().displayMode{
         case .banner:
             content
-                .overlay(ZStack{
-                    main()
-                        .offset(y: offsetY)
-                }
-                            .animation(Animation.spring(), value: isPresenting)
+                .overlay(
+                    ZStack{
+                        main()
+                            .offset(y: offsetY)
+                    }
+                        .animation(Animation.spring(), value: isPresenting)
                 )
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
@@ -539,13 +540,15 @@ public struct AlertToastModifier: ViewModifier{
                         
                         return AnyView(EmptyView())
                     }
-                        .overlay(ZStack{
-                            main()
-                                .offset(y: offsetY)
-                        }
-                                    .frame(maxWidth: screen.width, maxHeight: screen.height)
-                                    .offset(y: offset)
-                                    .animation(Animation.spring(), value: isPresenting))
+                        .overlay(
+                            ZStack{
+                                main()
+                                    .offset(y: offsetY)
+                            }
+                                .frame(maxWidth: screen.width, maxHeight: screen.height)
+                                .offset(y: offset)
+                                .animation(Animation.spring(), value: isPresenting)
+                        )
                 )
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
@@ -554,13 +557,15 @@ public struct AlertToastModifier: ViewModifier{
                 })
         case .alert:
             content
-                .overlay(ZStack{
-                    main()
-                        .offset(y: offsetY)
-                }
-                            .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
-                            .edgesIgnoringSafeArea(.all)
-                            .animation(Animation.spring(), value: isPresenting))
+                .overlay(
+                    ZStack{
+                        main()
+                            .offset(y: offsetY)
+                    }
+                        .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
+                        .edgesIgnoringSafeArea(.all)
+                        .animation(Animation.spring(), value: isPresenting)
+                )
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
                         onAppearAction()
