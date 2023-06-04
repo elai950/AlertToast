@@ -11,9 +11,7 @@
 import Combine
 import SwiftUI
 
-@available(iOS 13, macOS 11, *)
-private struct AnimatedCheckmark: View {
-
+struct AnimatedCheckmark: View {
   ///Checkmark color
   var color: Color = .black
 
@@ -48,9 +46,7 @@ private struct AnimatedCheckmark: View {
   }
 }
 
-@available(iOS 13, macOS 11, *)
-private struct AnimatedXmark: View {
-
+struct AnimatedXmark: View {
   ///xmark color
   var color: Color = .black
 
@@ -96,10 +92,7 @@ private struct AnimatedXmark: View {
 }
 
 //MARK: - Main View
-
-@available(iOS 13, macOS 11, *)
 public struct AlertToast: View {
-
   public enum BannerAnimation {
     case slide, pop
   }
@@ -141,7 +134,6 @@ public struct AlertToast: View {
 
   /// Customize Alert Appearance
   public enum AlertStyle: Equatable {
-
     case style(
       backgroundColor: Color? = nil,
       titleColor: Color? = nil,
@@ -411,9 +403,7 @@ public struct AlertToast: View {
   }
 }
 
-@available(iOS 13, macOS 11, *)
 public struct AlertToastModifier: ViewModifier {
-
   ///Presentation `Binding<Bool>`
   @Binding var isPresenting: Bool
 
@@ -614,8 +604,7 @@ public struct AlertToastModifier: ViewModifier {
 }
 
 ///Fileprivate View Modifier for dynamic frame when alert type is `.regular` / `.loading`
-@available(iOS 13, macOS 11, *)
-private struct WithFrameModifier: ViewModifier {
+struct WithFrameModifier: ViewModifier {
 
   var withFrame: Bool
 
@@ -634,9 +623,7 @@ private struct WithFrameModifier: ViewModifier {
 }
 
 ///Fileprivate View Modifier to change the alert background
-@available(iOS 13, macOS 11, *)
-private struct BackgroundModifier: ViewModifier {
-
+struct BackgroundModifier: ViewModifier {
   var color: Color?
 
   @ViewBuilder
@@ -652,9 +639,7 @@ private struct BackgroundModifier: ViewModifier {
 }
 
 ///Fileprivate View Modifier to change the text colors
-@available(iOS 13, macOS 11, *)
-private struct TextForegroundModifier: ViewModifier {
-
+struct TextForegroundModifier: ViewModifier {
   var color: Color?
 
   @ViewBuilder
@@ -668,10 +653,8 @@ private struct TextForegroundModifier: ViewModifier {
   }
 }
 
-@available(iOS 13, macOS 11, *)
-extension Image {
-
-  fileprivate func hudModifier() -> some View {
+private extension Image {
+   func hudModifier() -> some View {
     self
       .renderingMode(.template)
       .resizable()
@@ -680,9 +663,7 @@ extension Image {
   }
 }
 
-//@available(iOS 13, macOS 11, *)
 extension View {
-
   /// Return some view w/o frame depends on the condition.
   /// This view modifier function is set by default to:
   /// - `maxWidth`: 175
@@ -731,15 +712,11 @@ extension View {
     modifier(TextForegroundModifier(color: color))
   }
 
-  @ViewBuilder fileprivate func valueChanged<T: Equatable>(
-    value: T, onChange: @escaping (T) -> Void
+  @ViewBuilder
+  fileprivate func valueChanged<T: Equatable>(
+    value: T,
+    onChange: @escaping (T) -> Void
   ) -> some View {
-    if #available(iOS 14.0, *) {
-      self.onChange(of: value, perform: onChange)
-    } else {
-      self.onReceive(Just(value)) { (value) in
-        onChange(value)
-      }
-    }
+    self.onChange(of: value, perform: onChange)
   }
 }

@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 
 #if os(macOS)
-
-  @available(macOS 11, *)
   public struct BlurView: NSViewRepresentable {
     public typealias NSViewType = NSVisualEffectView
 
@@ -29,8 +27,6 @@ import SwiftUI
   }
 
 #else
-
-  @available(iOS 13, *)
   public struct BlurView: UIViewRepresentable {
     public typealias UIViewType = UIVisualEffectView
 
