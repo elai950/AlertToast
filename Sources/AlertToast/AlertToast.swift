@@ -246,7 +246,7 @@ public struct AlertToast: View{
                             .renderingMode(.template)
                             .foregroundColor(color)
                     case .loading:
-                        ActivityIndicator()
+                        ProgressView()
                     case .regular:
                         EmptyView()
                     }
@@ -292,7 +292,7 @@ public struct AlertToast: View{
                         .hudModifier()
                         .foregroundColor(color)
                 case .loading:
-                    ActivityIndicator()
+                    ProgressView()
                 case .regular:
                     EmptyView()
                 }
@@ -359,7 +359,7 @@ public struct AlertToast: View{
                     .padding(.bottom)
                 Spacer()
             case .loading:
-                ActivityIndicator()
+                ProgressView()
             case .regular:
                 EmptyView()
             }
