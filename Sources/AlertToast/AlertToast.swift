@@ -461,17 +461,16 @@ public struct AlertToastModifier: ViewModifier{
             case .hud:
                 alert()
                     .overlay(
-                        GeometryReader{ geo -> AnyView in
+                        GeometryReader{ geo in
                             let rect = geo.frame(in: .global)
                             
                             if rect.integral != alertRect.integral{
                                 
-                                DispatchQueue.main.async {
+                                let _ = DispatchQueue.main.async {
                                     
                                     self.alertRect = rect
                                 }
                             }
-                            return AnyView(EmptyView())
                         }
                     )
                     .onTapGesture {
@@ -528,16 +527,14 @@ public struct AlertToastModifier: ViewModifier{
         case .hud:
             content
                 .overlay(
-                    GeometryReader{ geo -> AnyView in
+                    GeometryReader{ geo in
                         let rect = geo.frame(in: .global)
                         
                         if rect.integral != hostRect.integral{
-                            DispatchQueue.main.async {
+                            let _ = DispatchQueue.main.async {
                                 self.hostRect = rect
                             }
                         }
-                        
-                        return AnyView(EmptyView())
                     }
                         .overlay(ZStack{
                             main()
