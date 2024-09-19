@@ -505,7 +505,6 @@ public struct AlertToastModifier: ViewModifier{
                     })
                     .transition(alert().displayMode == .banner(.slide) ? AnyTransition.slide.combined(with: .opacity) : AnyTransition.move(edge: .bottom))
             }
-            
         }
     }
     
@@ -520,11 +519,7 @@ public struct AlertToastModifier: ViewModifier{
                 }
                             .animation(Animation.spring(), value: isPresenting)
                 )
-                .valueChanged(value: isPresenting, onChange: { (presented) in
-                    if presented{
-                        onAppearAction()
-                    }
-                })
+                .onAppear(perform: onAppearAction)
         case .hud:
             content
                 .overlay(
@@ -547,11 +542,7 @@ public struct AlertToastModifier: ViewModifier{
                                     .offset(y: offset)
                                     .animation(Animation.spring(), value: isPresenting))
                 )
-                .valueChanged(value: isPresenting, onChange: { (presented) in
-                    if presented{
-                        onAppearAction()
-                    }
-                })
+                .onAppear(perform: onAppearAction)
         case .alert:
             content
                 .overlay(ZStack{
@@ -561,13 +552,8 @@ public struct AlertToastModifier: ViewModifier{
                             .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
                             .edgesIgnoringSafeArea(.all)
                             .animation(Animation.spring(), value: isPresenting))
-                .valueChanged(value: isPresenting, onChange: { (presented) in
-                    if presented{
-                        onAppearAction()
-                    }
-                })
+                .onAppear(perform: onAppearAction)
         }
-        
     }
     
     private func onAppearAction(){
