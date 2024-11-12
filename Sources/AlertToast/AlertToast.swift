@@ -436,6 +436,11 @@ public struct AlertToastModifier: ViewModifier{
     private var screen: CGRect {
 #if os(iOS)
         return UIScreen.main.bounds
+#elseif os(visionOS)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            return windowScene.coordinateSpace.bounds
+        }
+        return .zero
 #else
         return NSScreen.main?.frame ?? .zero
 #endif
