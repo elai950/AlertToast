@@ -30,7 +30,7 @@ public struct BlurView: NSViewRepresentable {
 
 #else
 
-@available(iOS 13, *)
+@available(iOS 14, *)
 public struct BlurView: UIViewRepresentable {
     public typealias UIViewType = UIVisualEffectView
     
